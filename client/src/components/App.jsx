@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ListNotes } from './ListNotes'
 import { LoginOrRegister } from './LoginOrRegister'
-import { SendNotes } from './sendNotes'
+import { SendNotes } from './SendNotes'
 import { useAuth } from './useAuth'
 
 function App() {
