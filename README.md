@@ -37,7 +37,7 @@ Una aplicación web para crear y gestionar notas personales, con autenticación 
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone https://github.com/Angelbyte96/StrapiWithAuth
+   git clone https://github.com/Angelbyte96/AppNotas
    cd tu-repositorio
    ```
 
