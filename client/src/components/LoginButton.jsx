@@ -1,16 +1,12 @@
-import { useAuth0 } from '@auth0/auth0-react'
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
 const LoginButton = () => {
-	const { loginWithRedirect } = useAuth0()
-
 	const handleLogin = () => {
-		window.location.href = 'http://localhost:1337/api/connect/auth0';
-	  };
+		window.location.href = `${STRAPI_URL}/api/connect/auth0`
+	}
 
 	return (
-		<button
-			onClick={handleLogin}
-			className='text-lg bg-blue-400 rounded-md p-1'>
+		<button onClick={handleLogin} className='text-lg bg-blue-400 rounded-md p-1'>
 			Login
 		</button>
 	)

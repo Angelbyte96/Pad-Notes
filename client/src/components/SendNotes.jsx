@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
 const SendNotes = ({ onNoteAdded }) => {
 	const [note, setNote] = useState('')
@@ -12,7 +13,7 @@ const SendNotes = ({ onNoteAdded }) => {
 		const token = user ? JSON.parse(localStorage.getItem('user')).token : null
 
 		try {
-			const response = await fetch(`http://localhost:1337/api/note`, {
+			const response = await fetch(`${STRAPI_URL}/api/note`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

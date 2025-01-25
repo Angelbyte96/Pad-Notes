@@ -1,5 +1,6 @@
 import { useState } from 'react'
 const STRAPI_TOKEN = import.meta.env.PUBLIC_STRAPI_TOKEN
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
 const FormRegister = () => {
 	const [email, setEmail] = useState('')
@@ -27,7 +28,7 @@ const FormRegister = () => {
 		setIsLoading(true)
 		try {
 			const response = await fetch(
-				'http://localhost:1337/api/auth/local/register',
+				`${STRAPI_URL}/api/auth/local/register`,
 				{
 					method: 'POST',
 					headers: {

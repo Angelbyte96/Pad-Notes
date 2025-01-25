@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useCallback, useEffect, useState } from 'react'
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
 const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const [notes, setNotes] = useState([])
@@ -16,7 +17,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 			try {
 				setIsLoading(true)
 				const fetchApi = await fetch(
-					`http://localhost:1337/api/note?populate=user&filters[user][documentId]=${userId}`,
+					`${STRAPI_URL}/api/note?populate=user&filters[user][documentId]=${userId}`,
 					{
 						headers: {
 							Authorization: `Bearer ${token}`
@@ -37,7 +38,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const handleDeleteNote = useCallback(
 		async noteToDelete => {
 			try {
-				await fetch(`http://localhost:1337/api/note/${noteToDelete}`, {
+				await fetch(`${STRAPI_URL}/api/note/${noteToDelete}`, {
 					method: 'DELETE',
 					headers: { Authorization: `Bearer ${token}` }
 				})

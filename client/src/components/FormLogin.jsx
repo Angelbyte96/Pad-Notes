@@ -1,5 +1,6 @@
 import { useState } from 'react'
 const STRAPI_TOKEN = import.meta.env.PUBLIC_STRAPI_TOKEN
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
 const FormLogin = () => {
 	const [email, setEmail] = useState('')
@@ -24,7 +25,7 @@ const FormLogin = () => {
 		}
 		setIsLoading(true)
 		try {
-			const response = await fetch('http://localhost:1337/api/auth/local/', {
+			const response = await fetch(`${STRAPI_URL}/api/auth/local/`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
