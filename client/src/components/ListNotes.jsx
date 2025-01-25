@@ -81,7 +81,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 									{note.text_note}
 								</span>
 								<button
-									className='bg-red-400 px-[0.2rem] py-[0.1rem] rounded-lg font-semibold text-sm'
+									className='bg-red-600 px-[0.2rem] py-[0.1rem] rounded-lg font-semibold text-sm'
 									onClick={() => handleDeleteNote(note.documentId)}>
 									Borrar
 								</button>
