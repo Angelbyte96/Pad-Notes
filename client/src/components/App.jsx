@@ -24,7 +24,7 @@ function App() {
 	}
 
 	return (
-		<main className='flex flex-col items-center justify-center gap-4 mx-auto w-10/12 '>
+		<main className='flex flex-col items-center justify-center gap-4  w-full'>
 			{isLogin ? (
 				<>
 					<h2 className='text-xl md:text-3xl text-white'>

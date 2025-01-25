@@ -83,7 +83,7 @@ const FormRegister = () => {
 				onSubmit={handleSubmit}
 				className='flex flex-col justify-center items-center gap-4 text-white w-10/12'>
 				<label htmlFor='username' className='flex flex-col w-full items-center'>
-					<span className='self-start'>Username:</span>
+					<span className='self-start'>Nombre de usuario:</span>
 					<input
 						type='text'
 						id='username'

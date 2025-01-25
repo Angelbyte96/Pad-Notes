@@ -77,7 +77,7 @@ const FormLogin = () => {
 				onSubmit={handleSubmit}
 				className='flex flex-col justify-center items-center gap-4 text-white w-10/12'>
 				<label htmlFor='email' className='flex flex-col w-full items-center'>
-					<span className='self-start'>Email o Username:</span>
+					<span className='self-start'>Email:</span>
 					<input
 						type='email'
 						id='email'
@@ -85,7 +85,7 @@ const FormLogin = () => {
 						value={email}
 						onChange={e => setEmail(e.target.value)}
 						className='bg-gray-200 p-1 rounded-md w-full text-black'
-						placeholder='Ingresa tu email o username'
+						placeholder='Ingresa tu email'
 					/>
 				</label>
 				<label htmlFor='password' className='flex flex-col w-full items-center'>

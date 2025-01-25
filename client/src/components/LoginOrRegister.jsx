@@ -24,14 +24,15 @@ const LoginOrRegister = () => {
 	return (
 		<section className='w-fit flex flex-col items-center gap-4 text-white bg-slate-700 px-2 py-4 rounded-md'>
 			{!showLogin && !showRegister && (
-				<div className='flex gap-4'>
+				<div className='flex flex-col items-center gap-4'>
 					<button
-						className='bg-blue-400 p-1 rounded-lg'
+						className='bg-blue-500 p-2 rounded-lg text-2xl font-semibold'
 						onClick={handleShowRegister}>
-						Register
+						Registrate
 					</button>
-					<button className='bg-blue-500 p-1 rounded-lg' onClick={handleShowLogin}>
-						Login
+					<span>O</span>
+					<button className='bg-blue-600 p-2 rounded-lg text-2xl font-semibold' onClick={handleShowLogin}>
+						Inicia sesión
 					</button>
 				</div>
 			)}
