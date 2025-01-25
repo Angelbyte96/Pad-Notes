@@ -38,7 +38,7 @@ function App() {
 					/>
 
 					{/* Sección para ingresar notas */}
-					<section className='flex flex-col items-center gap-4 w-full md:w-6/12 bg-opacity-80 bg-slate-800 p-4 rounded-lg'>
+					<section className='flex flex-col items-center gap-4 w-11/12 md:w-6/12 bg-opacity-80 bg-slate-800 p-4 rounded-lg'>
 						<SendNotes onNoteAdded={handleNoteAdded} />
 						<ListNotes refreshTrigger={refreshNotes} onNoteAdded={handleNoteAdded} />
 					</section>
