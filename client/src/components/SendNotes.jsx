@@ -36,11 +36,11 @@ const SendNotes = ({ onNoteAdded }) => {
 		<section
 			id='sendNotes'
 			className='flex flex-col items-center w-full gap-4'>
-			<h3 className='text-2xl text-white'>Ingresa alguna nota</h3>
+			<h3 className='text-xl md:text-2xl text-white'>Ingresa alguna nota</h3>
 			<form className='flex gap-2 w-full justify-center' onSubmit={handleSubmit}>
 				<input
 					type='text'
-					className='p-1 w-full'
+					className='p-1 w-8/12 md:w-full'
 					id='note'
 					name='note'
 					value={note}

@@ -52,7 +52,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 
 	return (
 		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 px-8 py-4 rounded-md'>
-			<h1 className='text-4xl text-white'>Lista de notas</h1>
+			<h1 className='text-2xl md:text-4xl text-white'>Lista de notas</h1>
 			{error ? (
 				<p className='text-red-500 text-lg'>{error}</p>
 			) : isLoading ? (
@@ -62,7 +62,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 				</div>
 			) : notes.length === 0 ? (
 				<div className='flex flex-col items-center gap-4 w-full'>
-					<p className='text-white text-lg'>No hay notas para mostrar</p>
+					<p className='text-white text-base md:text-lg'>No hay notas para mostrar</p>
 					<img
 						src='/image_sad.webp'
 						alt='Imagen no hay notas'

@@ -27,18 +27,18 @@ function App() {
 		<main className='flex flex-col items-center justify-center gap-4 mx-auto w-10/12 '>
 			{isLogin ? (
 				<>
-					<h2 className='text-3xl text-white'>
+					<h2 className='text-xl md:text-3xl text-white'>
 						Bienvenido a tu inicio{' '}
 						<span className='text-[#2cc9ff] font-semibold uppercase'>{userName}</span>
 					</h2>
 					<img
 						src='/Pikachu.webp'
 						alt='Pikachu image'
-						className='w-1/12 aspect-[739/1283]'
+						className='w-3/12 md:w-1/12 aspect-[739/1283]'
 					/>
 
 					{/* Sección para ingresar notas */}
-					<section className='flex flex-col items-center gap-4 w-6/12 bg-opacity-80 bg-slate-800 p-4 rounded-lg'>
+					<section className='flex flex-col items-center gap-4 w-full md:w-6/12 bg-opacity-80 bg-slate-800 p-4 rounded-lg'>
 						<SendNotes onNoteAdded={handleNoteAdded} />
 						<ListNotes refreshTrigger={refreshNotes} onNoteAdded={handleNoteAdded} />
 					</section>
