@@ -52,7 +52,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 
 	return (
 		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 px-8 py-4 rounded-md'>
-			<h1 className='text-2xl md:text-4xl text-white'>Lista de notas</h1>
+			<h1 className='text-2xl md:text-4xl text-white'>Tus notas</h1>
 			{error ? (
 				<p className='text-red-500 text-lg'>{error}</p>
 			) : isLoading ? (

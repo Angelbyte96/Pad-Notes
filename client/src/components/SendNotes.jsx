@@ -40,7 +40,7 @@ const SendNotes = ({ onNoteAdded }) => {
 			<form className='flex gap-2 w-full justify-center' onSubmit={handleSubmit}>
 				<input
 					type='text'
-					className='p-1 w-8/12 md:w-full'
+					className='p-1 w-8/12 md:w-full bg-white rounded-md'
 					id='note'
 					name='note'
 					value={note}
