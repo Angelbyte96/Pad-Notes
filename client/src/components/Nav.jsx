@@ -1,3 +1,5 @@
+import '@/styles/global.css'
+
 const Nav = () => {
     return (
         <nav className="flex items-center justify-center w-full bg-[#17142341] shadow-lg p-1">

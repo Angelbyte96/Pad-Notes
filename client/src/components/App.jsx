@@ -34,7 +34,7 @@ function App() {
 					<img
 						src='/Pikachu.webp'
 						alt='Pikachu image'
-						className='w-3/12 md:w-1/12 aspect-[739/1283]'
+						className='w-3/12 md:w-1/12 aspect-739/1283'
 					/>
 
 					{/* Sección para ingresar notas */}

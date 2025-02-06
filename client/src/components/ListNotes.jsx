@@ -66,7 +66,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 					<img
 						src='/image_sad.webp'
 						alt='Imagen no hay notas'
-						className='w-6/12 aspect-[1980/1939]'
+						className='w-6/12 aspect-1980/1939'
 					/>
 				</div>
 			) : (
