@@ -3,10 +3,11 @@ import { ListNotes } from './ListNotes'
 import { LoginOrRegister } from './LoginOrRegister'
 import { SendNotes } from './SendNotes'
 import { useAuth } from './useAuth'
+import { useChangeNotes } from '@/hooks/useChangeNotes'
 
 function App() {
 	const { isLogin, handleLogout } = useAuth()
-	const [refreshNotes, setRefreshNotes] = useState(0)
+	const { refreshNotes, handleNoteAdded } = useChangeNotes()
 	const [userName, setUserName] = useState(null)
 	const loggedUserJSON = window.localStorage.getItem('user')
 
@@ -17,11 +18,6 @@ function App() {
 			setUserName(user.username)
 		}
 	}, [isLogin, loggedUserJSON])
-
-	// Función para refrescar las notas
-	const handleNoteAdded = () => {
-		setRefreshNotes(prev => prev + 1) // Función para refrescar las notas
-	}
 
 	return (
 		<main className='flex flex-col items-center justify-center gap-4  w-full'>
