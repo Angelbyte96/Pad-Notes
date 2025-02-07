@@ -62,8 +62,17 @@ Una aplicación web para crear y gestionar notas personales, con autenticación 
     API_TOKEN_SALT=tobemodified
     ADMIN_JWT_SECRET=tobemodified
     TRANSFER_TOKEN_SALT=tobemodified
+
+   # Database
+    DATABASE_CLIENT=sqlite
+    DATABASE_HOST=
+    DATABASE_PORT=
+    DATABASE_NAME=
+    DATABASE_USERNAME=
+    DATABASE_PASSWORD=
+    DATABASE_SSL=false
+    DATABASE_FILENAME=.tmp/data.db
     JWT_SECRET=tobemodified
-    PUBLIC_URL=http://localhost:1337
    ```
 5. **Crear archivo `.env` en client con**:
    ```env
