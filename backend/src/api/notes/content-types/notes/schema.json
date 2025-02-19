@@ -24,7 +24,7 @@
       },
       "type": "text",
       "required": true,
-      "maxLength": 200,
+      "maxLength": 400,
       "minLength": 3
     },
     "slug": {

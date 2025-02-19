@@ -406,7 +406,7 @@ export interface ApiNotesNotes extends Struct.CollectionTypeSchema {
         };
       }> &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 200;
+        maxLength: 400;
         minLength: 3;
       }>;
     updatedAt: Schema.Attribute.DateTime;
