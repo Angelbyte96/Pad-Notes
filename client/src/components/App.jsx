@@ -20,7 +20,7 @@ function App() {
 	}, [isLogin, loggedUserJSON])
 
 	return (
-		<main className='flex flex-col items-center justify-center gap-4  w-full'>
+		<main className='flex flex-col items-center justify-center gap-4 mb-2 w-full'>
 			{isLogin ? (
 				<>
 					<h2 className='text-xl md:text-3xl text-white'>
