@@ -77,7 +77,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 				</div>
 			) : (
 				<section className='flex flex-col w-full'>
-					<ul className='grid grid-cols-[repeat(auto-fill,_minmax(400px,1fr))] w-full gap-4 text-white'>
+					<ul className='grid grid-cols-[repeat(auto-fill,_minmax(150px,1fr))] w-full gap-4 text-white'>
 						{notes.map(note => (
 							<li
 								key={note.id}
