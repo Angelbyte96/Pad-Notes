@@ -52,7 +52,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	)
 
 	return (
-		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 px-8 py-4 rounded-md'>
+		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 py-4 rounded-md'>
 			<h1 className='text-2xl md:text-4xl text-white'>Tus notas</h1>
 			{error ? (
 				<>
@@ -77,14 +77,14 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 				</div>
 			) : (
 				<section className='flex flex-col w-full'>
-					<ul className='grid grid-cols-[repeat(auto-fill,_minmax(150px,1fr))] w-full gap-4 text-white'>
+					<ul className='grid grid-cols-[repeat(auto-fill,_minmax(200px,1fr))] w-full gap-4 text-white'>
 						{notes.map(note => (
 							<li
 								key={note.id}
 								className='flex flex-col bg-slate-500 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group'>
 								<span className='break-all whitespace-normal'>{note.text_note}</span>
 								<button
-									className='bg-red-700 self-end px-[0.2rem] py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+									className='bg-red-700 self-end px-2 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
 									onClick={() => handleDeleteNote(note.documentId)}>
 									<Trash2 size={20} className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'/>
 								</button>
