@@ -33,11 +33,6 @@ function App() {
 						<SendNotes onNoteAdded={handleNoteAdded} />
 						<ListNotes refreshTrigger={refreshNotes} onNoteAdded={handleNoteAdded} />
 					</section>
-					<img
-						src='/Pikachu.webp'
-						alt='Pikachu image'
-						className='w-3/12 md:w-[4%] aspect-739/1283'
-					/>
 					<button
 						className='bg-red-500 p-1 text-white rounded-lg'
 						onClick={handleLogout}>
