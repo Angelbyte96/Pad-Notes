@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useCallback, useEffect, useState } from 'react'
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
+import { Trash2 } from 'lucide-react'
 
 const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const [notes, setNotes] = useState([])
@@ -76,19 +77,16 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 				</div>
 			) : (
 				<section className='flex flex-col w-full'>
-					<ul className='flex flex-col w-full text-white gap-2'>
+					<ul className='grid grid-cols-[repeat(auto-fill,_minmax(400px,1fr))] w-full gap-4 text-white'>
 						{notes.map(note => (
 							<li
 								key={note.id}
-								className='flex items-center justify-between gap-2 w-full text-lg'>
-								<span className=''>
-									<span className='select-none'>• </span>
-									{note.text_note}
-								</span>
+								className='flex flex-col bg-slate-500 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group'>
+								<span className='break-all whitespace-normal'>{note.text_note}</span>
 								<button
-									className='bg-red-600 px-[0.2rem] py-[0.1rem] rounded-lg font-semibold text-sm'
+									className='bg-red-700 self-end px-[0.2rem] py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
 									onClick={() => handleDeleteNote(note.documentId)}>
-									Borrar
+									<Trash2 size={20} className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'/>
 								</button>
 							</li>
 						))}
