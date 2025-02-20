@@ -1,0 +1,15 @@
+PUT http://localhost:1337/api/note/109
+Content-Type: application/json
+Authorization: Bearer bf1057f3c96abda07ee5d9be4f3ac10b90bfaf3017d758f78440df28c2cde01f0161d5404105dac23f7e38f2a779818e3bfeec9fdee79007ff81443679108cf94e747ef85b03fc0e62a200ef2016ffc789e6cbdbd35186d827c6dc936a06a86a212641f80debbba335a742479e8904f087ab5009710dab1d7028ea9b1a63e99e
+
+{
+    "data":{
+        "text_note": "Nuevo texto2"
+    }
+}
+
+###
+
+GET http://localhost:1337/api/note/109?locale=en
+Content-Type: application/json
+Authorization: Bearer bf1057f3c96abda07ee5d9be4f3ac10b90bfaf3017d758f78440df28c2cde01f0161d5404105dac23f7e38f2a779818e3bfeec9fdee79007ff81443679108cf94e747ef85b03fc0e62a200ef2016ffc789e6cbdbd35186d827c6dc936a06a86a212641f80debbba335a742479e8904f087ab5009710dab1d7028ea9b1a63e99e

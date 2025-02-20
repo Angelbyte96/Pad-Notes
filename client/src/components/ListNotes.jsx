@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useCallback, useEffect, useState } from 'react'
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
-import { Trash2 } from 'lucide-react'
+import { Trash2, SquarePen, X, Check } from 'lucide-react'
 
 const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const [notes, setNotes] = useState([])
+	const [note, setNote] = useState('')
 	const [isLoading, setIsLoading] = useState(true)
 	const [error, setError] = useState(null)
+	const [editingNoteId, setEditingNoteId] = useState(null)
 	const user = JSON.parse(window.localStorage.getItem('user'))
 	const token = user.token
 	const userId = user.id
@@ -36,6 +38,34 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 		if (token && userId) fetchNotes()
 	}, [token, userId, refreshTrigger])
 
+	const handleUpdate = async e => {
+		e.preventDefault()
+
+		const user = JSON.parse(localStorage.getItem('user'))
+
+		const token = user ? JSON.parse(localStorage.getItem('user')).token : null
+
+		try {
+			const response = await fetch(`${STRAPI_URL}/api/note/${editingNoteId}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`
+				},
+				body: JSON.stringify({ data: { text_note: note } })
+			})
+
+			if (!response.ok) throw new Error('Error al enviar la nota')
+
+			setNote('')
+
+			onNoteAdded()
+			setEditingNoteId(null)
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
 	const handleDeleteNote = useCallback(
 		async noteToDelete => {
 			try {
@@ -50,6 +80,14 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 		},
 		[token, onNoteAdded]
 	)
+
+	const handleEditNote = useCallback(note => {
+		setEditingNoteId(note.documentId)
+	})
+
+	const handleCancelEdit = useCallback(() => {
+		setEditingNoteId(null)
+	})
 
 	return (
 		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 py-4 rounded-md'>
@@ -78,18 +116,66 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 			) : (
 				<section className='flex flex-col w-full'>
 					<ul className='grid grid-cols-[repeat(auto-fit,_minmax(200px,1fr))] w-full gap-4 text-white'>
-						{notes.map(note => (
-							<li
-								key={note.id}
-								className='flex flex-col bg-slate-500 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group'>
-								<span className='break-all whitespace-normal'>{note.text_note}</span>
-								<button
-									className='bg-red-700 self-end px-2 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
-									onClick={() => handleDeleteNote(note.documentId)}>
-									<Trash2 size={20} className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'/>
-								</button>
-							</li>
-						))}
+						{notes.map(note => {
+							return (
+								<li
+									key={note.id}
+									className='flex flex-col bg-slate-500 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group'>
+									<div className='flex flex-col items-center gap-2 w-full'>
+										{editingNoteId === note.documentId ? (
+											<>
+												<textarea
+													defaultValue={note.text_note}
+													className='break-all whitespace-normal'
+													onChange={e => setNote(e.target.value)}></textarea>
+												<div className='flex self-end gap-2'>
+													<button
+														className='bg-red-700 self-end px-2 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+														onClick={handleCancelEdit}>
+														<X
+															size={20}
+															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+														/>
+													</button>
+													<button
+														className='bg-green-700 self-end px-2 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+														onClick={handleUpdate}>
+														<Check
+															size={20}
+															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+														/>
+													</button>
+												</div>
+											</>
+										) : (
+											<>
+												<span className='break-all whitespace-normal'>
+													{note.text_note}
+												</span>
+												<div className='flex self-end gap-2'>
+													<button
+														className='bg-blue-400 self-end px-2 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+														onClick={() => handleEditNote(note)}>
+														<SquarePen
+															size={20}
+															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+														/>
+													</button>
+													<button
+														className='bg-red-700 self-end px-2 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+														onClick={() => handleDeleteNote(note.documentId)}>
+														<Trash2
+															size={20}
+															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+														/>
+													</button>
+												</div>
+											</>
+										)}
+									</div>
+								</li>
+							)
+						})}
 					</ul>
 				</section>
 			)}
