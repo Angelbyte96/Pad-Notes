@@ -20,7 +20,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 			try {
 				setIsLoading(true)
 				const fetchApi = await fetch(
-					`${STRAPI_URL}/api/note?populate=user&filters[user][documentId]=${userId}`,
+					`${STRAPI_URL}/api/note?populate=user&filters[user][documentId]=${userId}&sort=createdAt`,
 					{
 						headers: {
 							Authorization: `Bearer ${token}`
