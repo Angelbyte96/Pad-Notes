@@ -120,13 +120,13 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 							return (
 								<li
 									key={note.id}
-									className='flex flex-col bg-slate-500 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group'>
+									className='flex flex-col bg-slate-500 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group h-auto'>
 									<div className='flex flex-col items-center gap-2 w-full'>
 										{editingNoteId === note.documentId ? (
 											<>
 												<textarea
 													defaultValue={note.text_note}
-													className='break-all whitespace-normal'
+													className='break-all whitespace-normal w-full field-sizing-content text-center'
 													onChange={e => setNote(e.target.value)}></textarea>
 												<div className='flex self-end gap-2'>
 													<button
