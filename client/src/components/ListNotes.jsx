@@ -115,13 +115,13 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 				</div>
 			) : (
 				<section className='flex flex-col w-full'>
-					<ul className='grid grid-cols-[repeat(auto-fit,_minmax(200px,1fr))] w-full gap-4 text-white'>
+					<ul className='grid grid-cols-[repeat(auto-fit,_minmax(200px,1fr))] w-full items-stretch gap-4 text-white'>
 						{notes.map(note => {
 							return (
 								<li
 									key={note.id}
-									className='flex flex-col bg-slate-500 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group h-auto'>
-									<div className='flex flex-col items-center gap-2 w-full'>
+									className='flex flex-col bg-slate-500 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group h-full'>
+									<div className='flex flex-col items-center justify-between gap-2 w-full h-full'>
 										{editingNoteId === note.documentId ? (
 											<>
 												<textarea
