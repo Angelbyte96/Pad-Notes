@@ -46,7 +46,7 @@ const SendNotes = ({ onNoteAdded }) => {
 					value={note}
 					onChange={e => setNote(e.target.value)}
 				/>
-				<button className='bg-cyan-600 p-1 rounded-md font-semibold text-white'>
+				<button className='bg-cyan-600 p-1 rounded-md font-semibold text-white cursor-pointer'>
 					Guardar
 				</button>
 			</form>
