@@ -5,7 +5,8 @@ import { Trash2, SquarePen, X, Check } from 'lucide-react'
 
 const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const [notes, setNotes] = useState([])
-	const [note, setNote] = useState('')
+	const [noteTitle, setNoteTitle] = useState('')
+	const [noteMessage, setNoteMessage] = useState('')
 	const [isLoading, setIsLoading] = useState(true)
 	const [error, setError] = useState(null)
 	const [editingNoteId, setEditingNoteId] = useState(null)
@@ -52,12 +53,13 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 					'Content-Type': 'application/json',
 					Authorization: `Bearer ${token}`
 				},
-				body: JSON.stringify({ data: { text_note: note } })
+				body: JSON.stringify({ data: { title: noteTitle, text_note: noteMessage } })
 			})
 
 			if (!response.ok) throw new Error('Error al enviar la nota')
 
-			setNote('')
+			setNoteTitle('')
+			setNoteMessage('')
 
 			onNoteAdded()
 			setEditingNoteId(null)
@@ -83,6 +85,8 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 
 	const handleEditNote = useCallback(note => {
 		setEditingNoteId(note.documentId)
+		setNoteTitle(note.title)
+		setNoteMessage(note.text_note)
 	})
 
 	const handleCancelEdit = useCallback(() => {
@@ -117,6 +121,8 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 				<section className='flex flex-col w-full'>
 					<ul className='grid grid-cols-[repeat(auto-fit,_minmax(200px,1fr))] w-full items-stretch gap-4 text-white'>
 						{notes.map(note => {
+							const isUnchanged =
+								noteTitle === note.title && noteMessage === note.text_note
 							return (
 								<li
 									key={note.id}
@@ -125,9 +131,13 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 										{editingNoteId === note.documentId ? (
 											<>
 												<textarea
-													defaultValue={note.text_note}
-													className='break-all whitespace-normal w-full field-sizing-content text-center'
-													onChange={e => setNote(e.target.value)}></textarea>
+													value={noteTitle}
+													className='break-all whitespace-normal w-full field-sizing-content text-center uppercase resize-none border-1 border-[#ccc]'
+													onChange={e => setNoteTitle(e.target.value)}></textarea>
+												<textarea
+													value={noteMessage}
+													className='break-all whitespace-normal w-full field-sizing-content text-center resize-none border-1 border-[#ccc] grow'
+													onChange={e => setNoteMessage(e.target.value)}></textarea>
 												<div className='flex self-end gap-4'>
 													<button
 														className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
@@ -138,8 +148,9 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 														/>
 													</button>
 													<button
-														className='bg-green-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
-														onClick={handleUpdate}>
+														className='bg-green-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer disabled:bg-gray-500'
+														onClick={handleUpdate}
+														disabled={isUnchanged}>
 														<Check
 															size={20}
 															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
@@ -149,6 +160,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 											</>
 										) : (
 											<>
+												<p className='uppercase'>{note.title}</p>
 												<span className='break-all whitespace-normal'>
 													{note.text_note}
 												</span>
