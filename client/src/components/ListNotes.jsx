@@ -120,7 +120,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 							return (
 								<li
 									key={note.id}
-									className='flex flex-col bg-slate-500 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group h-full'>
+									className='flex flex-col bg-cyan-900 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group h-full'>
 									<div className='flex flex-col items-center justify-between gap-2 w-full h-full'>
 										{editingNoteId === note.documentId ? (
 											<>
@@ -128,9 +128,9 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 													defaultValue={note.text_note}
 													className='break-all whitespace-normal w-full field-sizing-content text-center'
 													onChange={e => setNote(e.target.value)}></textarea>
-												<div className='flex self-end gap-2'>
+												<div className='flex self-end gap-4'>
 													<button
-														className='bg-red-700 self-end px-2 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+														className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
 														onClick={handleCancelEdit}>
 														<X
 															size={20}
@@ -138,7 +138,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 														/>
 													</button>
 													<button
-														className='bg-green-700 self-end px-2 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+														className='bg-green-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
 														onClick={handleUpdate}>
 														<Check
 															size={20}
@@ -152,19 +152,19 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 												<span className='break-all whitespace-normal'>
 													{note.text_note}
 												</span>
-												<div className='flex self-end gap-2'>
+												<div className='flex w-full justify-between gap-2'>
 													<button
-														className='bg-blue-400 self-end px-2 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
-														onClick={() => handleEditNote(note)}>
-														<SquarePen
+														className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+														onClick={() => handleDeleteNote(note.documentId)}>
+														<Trash2
 															size={20}
 															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
 														/>
 													</button>
 													<button
-														className='bg-red-700 self-end px-2 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
-														onClick={() => handleDeleteNote(note.documentId)}>
-														<Trash2
+														className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+														onClick={() => handleEditNote(note)}>
+														<SquarePen
 															size={20}
 															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
 														/>
