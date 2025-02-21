@@ -160,7 +160,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 											</>
 										) : (
 											<>
-												<p className='uppercase'>{note.title}</p>
+												<p className='uppercase font-bold'>{note.title}</p>
 												<span className='break-all whitespace-normal'>
 													{note.text_note}
 												</span>
