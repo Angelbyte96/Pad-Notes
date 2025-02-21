@@ -44,7 +44,7 @@ const SendNotes = ({ onNoteAdded }) => {
 				onSubmit={handleSubmit}>
 				<input
 					type='text'
-					className='p-1 w-8/12 md:w-full bg-white rounded-md'
+					className='p-1 w-full md:w-full bg-white rounded-md'
 					id='title'
 					name='title'
 					value={noteTitle}
@@ -53,7 +53,7 @@ const SendNotes = ({ onNoteAdded }) => {
 				/>
 				<input
 					type='text'
-					className='p-1 w-8/12 md:w-full bg-white rounded-md'
+					className='p-1 w-full md:w-full bg-white rounded-md'
 					id='note'
 					name='note'
 					value={note}
