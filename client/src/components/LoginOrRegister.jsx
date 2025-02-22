@@ -22,7 +22,7 @@ const LoginOrRegister = () => {
 	}
 
 	return (
-		<section className='w-fit flex flex-col items-center gap-4 text-white bg-slate-700 px-2 py-4 rounded-md'>
+		<section className='w-fit flex flex-col items-center gap-4 text-white px-2 py-4'>
 			{!showLogin && !showRegister && (
 				<div className='flex flex-col items-center gap-4'>
 					<button
@@ -30,7 +30,7 @@ const LoginOrRegister = () => {
 						onClick={handleShowRegister}>
 						Registrate
 					</button>
-					<span>O</span>
+					<span className='text-black'>O</span>
 					<button className='bg-blue-600 p-2 rounded-lg text-2xl font-semibold' onClick={handleShowLogin}>
 						Inicia sesión
 					</button>
