@@ -1,17 +1,11 @@
 ---
-import { Nav } from '@/components/Nav.jsx'
 import Layout from '../layouts/Layout.astro'
 import App from '@/components/App.jsx'
-import { Footer } from '@/components/Footer.jsx'
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<div class="min-h-screen grid place-items-start md:place-items-center grid-rows-[auto_1fr_auto] gap-2">
-		<Nav />
-		<App client:only='react' />
-		<Footer />
-	</div>
+	<App client:only='react' />
 </Layout>
