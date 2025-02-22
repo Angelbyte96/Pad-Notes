@@ -175,7 +175,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 														/>
 													</button>
 													<div className='flex gap-2'>
-														<ButtonCopy />
+														<ButtonCopy note={note.text_note}/>
 														<button
 															className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
 															onClick={() => handleEditNote(note)}>
