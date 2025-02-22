@@ -1,26 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ListNotes } from './ListNotes'
 import { LoginOrRegister } from './LoginOrRegister'
 import { SendNotes } from './SendNotes'
-import { useAuth } from './useAuth'
+import { useAuth } from '../hooks/useAuth'
 import { useChangeNotes } from '@/hooks/useChangeNotes'
 import { StickyNote } from 'lucide-react'
 
 function App() {
-	const { isLogin, handleLogout } = useAuth()
+	const { isLogin, handleLogout, userName } = useAuth()
 	const [createNote, setCreateNote] = useState(false)
 	const { refreshNotes, handleNoteAdded } = useChangeNotes()
-	const [userName, setUserName] = useState(null)
-	const loggedUserJSON = window.localStorage.getItem('user')
 	const highlightStyle = { color: '#FF5722' }
-
-	// useEffect para obtener el usuario logueado
-	useEffect(() => {
-		if (isLogin) {
-			const user = JSON.parse(loggedUserJSON)
-			setUserName(user.username)
-		}
-	}, [isLogin, loggedUserJSON])
 
 	return (
 		<main className='flex flex-col items-center justify-center mt-10 md:mt-0 gap-4 mb-2 w-full'>
@@ -66,7 +56,7 @@ function App() {
 							onClick={() => setCreateNote(true)}>
 							<span>Crear nota</span>
 							<span>
-								<StickyNote size={20}/>
+								<StickyNote size={20} />
 							</span>
 						</button>
 					)}
