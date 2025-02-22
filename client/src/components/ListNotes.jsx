@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState } from 'react'
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 import { Trash2, SquarePen, X, Check } from 'lucide-react'
+import { ButtonCopy } from './ButtonCopy'
 
 const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const [notes, setNotes] = useState([])
@@ -166,21 +167,24 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 												</span>
 												<div className='flex w-full justify-between gap-2'>
 													<button
-														className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+														className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
 														onClick={() => handleDeleteNote(note.documentId)}>
 														<Trash2
 															size={20}
 															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
 														/>
 													</button>
-													<button
-														className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
-														onClick={() => handleEditNote(note)}>
-														<SquarePen
-															size={20}
-															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
-														/>
-													</button>
+													<div className='flex gap-2'>
+														<ButtonCopy />
+														<button
+															className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
+															onClick={() => handleEditNote(note)}>
+															<SquarePen
+																size={20}
+																className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+															/>
+														</button>
+													</div>
 												</div>
 											</>
 										)}

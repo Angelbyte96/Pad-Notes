@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import { Toaster } from '@pheralb/toast';
 ---
 
 <!doctype html>
@@ -13,5 +14,6 @@ import '../styles/global.css'
 	</head>
 	<body class='bg-[#0c032fcf] h-[100vh]'>
 		<slot />
+		<Toaster client:load />
 	</body>
 </html>
