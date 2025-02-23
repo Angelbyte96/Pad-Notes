@@ -1,3 +1,4 @@
+import { navigate } from 'astro/virtual-modules/transitions-router.js'
 import { useState } from 'react'
 const STRAPI_TOKEN = import.meta.env.PUBLIC_STRAPI_TOKEN
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
@@ -61,7 +62,7 @@ const FormLogin = () => {
 
 			resetForm()
 			setTimeout(() => {
-				window.location.reload()
+				navigate('/dashboard')
 			}, 2000)
 		} catch (error) {
 			setIsError(true)

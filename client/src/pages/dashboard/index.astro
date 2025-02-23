@@ -1,0 +1,10 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { Dashboard } from '@/components/Dashboard.jsx'
+---
+
+<Layout>
+	<main class='flex flex-col items-center justify-start h-full w-full'>
+		<Dashboard client:only='react' />
+	</main>
+</Layout>

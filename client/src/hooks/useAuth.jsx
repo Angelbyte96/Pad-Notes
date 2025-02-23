@@ -1,23 +1,24 @@
+// lenguaje: javascript
+import { navigate } from 'astro/virtual-modules/transitions-router.js'
 import { useState, useEffect } from 'react'
 
 const useAuth = () => {
 	const [isLogin, setIsLogin] = useState(false)
 	const [userName, setUserName] = useState(null)
+	const [isLoading, setIsLoading] = useState(true)
 	const loggedUserJSON = window.localStorage.getItem('user')
 
-	const token = window.localStorage.getItem('user')
-		? JSON.parse(window.localStorage.getItem('user')).token
-		: null
+	const token = loggedUserJSON ? JSON.parse(loggedUserJSON).token : null
 
 	useEffect(() => {
 		if (token) {
 			setIsLogin(true)
 		}
+		setIsLoading(false)
 	}, [token])
 
-	// useEffect para obtener el usuario logueado
 	useEffect(() => {
-		if (isLogin) {
+		if (isLogin && loggedUserJSON) {
 			const user = JSON.parse(loggedUserJSON)
 			setUserName(user.username)
 		}
@@ -26,9 +27,10 @@ const useAuth = () => {
 	const handleLogout = () => {
 		window.localStorage.removeItem('user')
 		setIsLogin(false)
+		navigate('/')
 	}
 
-	return { isLogin, handleLogout, userName }
+	return { isLogin, handleLogout, userName, isLoading }
 }
 
 export { useAuth }
