@@ -11,12 +11,18 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const [error, setError] = useState(null)
 	const [editingNoteId, setEditingNoteId] = useState(null)
-	const user = JSON.parse(window.localStorage.getItem('user'))
-	const token = user.token
-	const userId = user.id
+
+	// Obtenemos el usuario desde localStorage
+	const storedUser = window.localStorage.getItem('user')
+	const user = storedUser ? JSON.parse(storedUser) : null
+	const token = user ? user.token : null
+	const userId = user ? user.id : null
 
 	useEffect(() => {
-		if (!token || !userId) return
+		if (!token || !userId) {
+			setIsLoading(false)
+			return
+		}
 
 		const fetchNotes = async () => {
 			try {
@@ -37,22 +43,25 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 				setIsLoading(false)
 			}
 		}
-		if (token && userId) fetchNotes()
+
+		fetchNotes()
 	}, [token, userId, refreshTrigger])
 
 	const handleUpdate = async e => {
 		e.preventDefault()
 
-		const user = JSON.parse(localStorage.getItem('user'))
-
-		const token = user ? JSON.parse(localStorage.getItem('user')).token : null
+		const storedUserForUpdate = window.localStorage.getItem('user')
+		const userForUpdate = storedUserForUpdate
+			? JSON.parse(storedUserForUpdate)
+			: null
+		const userToken = userForUpdate ? userForUpdate.token : null
 
 		try {
 			const response = await fetch(`${STRAPI_URL}/api/note/${editingNoteId}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`
+					Authorization: `Bearer ${userToken}`
 				},
 				body: JSON.stringify({ data: { title: noteTitle, text_note: noteMessage } })
 			})
@@ -61,7 +70,6 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 
 			setNoteTitle('')
 			setNoteMessage('')
-
 			onNoteAdded()
 			setEditingNoteId(null)
 		} catch (error) {
@@ -88,11 +96,16 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 		setEditingNoteId(note.documentId)
 		setNoteTitle(note.title)
 		setNoteMessage(note.text_note)
-	})
+	}, [])
 
 	const handleCancelEdit = useCallback(() => {
 		setEditingNoteId(null)
-	})
+	}, [])
+
+	// Renderizamos un mensaje de usuario no autentificado sin retornar anticipadamente
+	if (!user) {
+		return <p>No hay usuario autentificado.</p>
+	}
 
 	return (
 		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 py-4 rounded-md'>
@@ -175,7 +188,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 														/>
 													</button>
 													<div className='flex gap-2'>
-														<ButtonCopy note={note.text_note}/>
+														<ButtonCopy note={note.text_note} />
 														<button
 															className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
 															onClick={() => handleEditNote(note)}>

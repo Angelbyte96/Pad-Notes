@@ -3,6 +3,8 @@ import { LoginOrRegister } from './LoginOrRegister'
 import { useAuth } from '../hooks/useAuth'
 import { StickyNote } from 'lucide-react'
 import { navigate } from 'astro/virtual-modules/transitions-router.js'
+import { LoginButton } from './LoginButton'
+import { AuthCallback } from './AuthCallback'
 
 function App() {
 	const { isLogin } = useAuth()
@@ -34,7 +36,9 @@ function App() {
 				</p>
 
 				{createNote ? (
-					<LoginOrRegister />
+					<>
+						<LoginButton provider={'google'} />
+					</>
 				) : (
 					<button
 						className='flex items-center justify-center gap-1 text-base md:text-lg font-bold cursor-pointer bg-yellow-500 p-1 rounded-md'

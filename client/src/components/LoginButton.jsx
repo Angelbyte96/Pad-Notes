@@ -1,8 +1,8 @@
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
-const LoginButton = () => {
+const LoginButton = ({ provider }) => {
 	const handleLogin = () => {
-		window.location.href = `${STRAPI_URL}/api/connect/auth0`
+		window.location.href = `${STRAPI_URL}/api/connect/${provider}`
 	}
 
 	return (
