@@ -1,14 +1,13 @@
 ---
-export const prerender = false;
+export const prerender = false
 export async function getStaticPaths() {
-  const providers = ['github', 'google', 'twitter'];
-  return providers.map((provider) => ({ params: { provider } }));
+	const providers = ['github', 'google', 'twitter']
+	return providers.map(provider => ({ params: { provider } }))
 }
 
-import { AuthRedirect } from '../../../components/AuthRedirect.jsx';
+import { AuthRedirect } from '@/components/AuthRedirect.jsx'
 
-const { provider } = Astro.params;
-console.log(provider);
+const { provider } = Astro.params
 ---
 
 <AuthRedirect client:only='react' provider={provider} />
