@@ -37,7 +37,14 @@ function App() {
 
 				{createNote ? (
 					<>
-						<LoginButton provider={'google'} />
+						<LoginButton
+							provider={'google'}
+							className='flex items-center justify-center gap-2 text-lg text-white bg-[#1f2125] rounded-md p-1.5 cursor-pointer'
+						/>
+						{/* <LoginButton
+							provider={'microsoft'}
+							className='flex items-center justify-center gap-2 text-lg text-black bg-white rounded-md p-1.5 cursor-pointer'
+						/> */}
 					</>
 				) : (
 					<button
