@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
-import { LoginOrRegister } from './LoginOrRegister'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '@/hooks/useAuth'
 import { StickyNote } from 'lucide-react'
 import { navigate } from 'astro/virtual-modules/transitions-router.js'
-import { LoginButton } from './LoginButton'
-import { AuthCallback } from './AuthCallback'
+import { LoginButton } from '@/components/LoginButton'
 
 function App() {
 	const { isLogin } = useAuth()
