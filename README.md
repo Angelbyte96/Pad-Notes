@@ -3,7 +3,7 @@
 
 Una aplicación web para crear y gestionar notas personales, con autenticación de usuarios integrada usando Strapi como backend.
 
-![Captura de pantalla de la aplicación](https://res.cloudinary.com/ddinz4ewu/image/upload/v1737701393/Recursos/StrapiWithAuth/Web.png) <!-- Agrega una imagen aquí -->
+![Captura de pantalla de la aplicación](https://res.cloudinary.com/ddinz4ewu/image/upload/v1740539657/Web.png) <!-- Agrega una imagen aquí -->
 
 ## 🚀 Características
 
@@ -123,9 +123,9 @@ StrapiWithAuth0/
 
 # 🔍 Capturas de Pantalla
 
-![Login](https://res.cloudinary.com/ddinz4ewu/image/upload/v1737699916/Recursos/StrapiWithAuth/Login.png)
-![Register](https://res.cloudinary.com/ddinz4ewu/image/upload/v1737700365/Recursos/StrapiWithAuth/Register.png)
-![Lista de Notas](https://res.cloudinary.com/ddinz4ewu/image/upload/v1737700526/Recursos/StrapiWithAuth/ListNotes.png)
+![Login](https://res.cloudinary.com/ddinz4ewu/image/upload/v1740539807/Login.png)
+![Home](https://res.cloudinary.com/ddinz4ewu/image/upload/v1740544025/Home.png)
+![Lista de Notas](https://res.cloudinary.com/ddinz4ewu/image/upload/v1740544195/Notes.png)
 
 ## 🤝 Contribución
 
