@@ -23,7 +23,7 @@ Una aplicación web para crear y gestionar notas personales, con autenticación 
   ![Strapi](https://img.shields.io/badge/Strapi-2F2E8B?logo=strapi&logoColor=white)
 
 - **Otros**:  
-  ![Auth0](https://img.shields.io/badge/Auth0-EB5424?logo=auth0&logoColor=white) (Opcional)
+  ![Auth_2.0](https://img.shields.io/badge/Auth_2.0-005e9d?logo=webauthn&logoColor=white&logoSize=auto) (Google)
 
 ## 📦 Instalación
 
