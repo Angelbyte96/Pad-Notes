@@ -74,13 +74,13 @@ const NoteArticle = ({
 											isOpen={true}
 											onClose={cerrarModal}
 											setEditingNoteId={setEditingNoteId}
-											className='self-center justify-self-center justify-center text-white p-4 rounded-lg w-11/12 md:w-6/12 text-center bg-cyan-900 backdrop:bg-gray-950 backdrop:opacity-90 backdrop:blur-xs cursor-auto'>
+											className='self-center justify-self-center justify-center text-white p-4 rounded-lg w-11/12 md:w-6/12 text-center bg-slate-800 backdrop:bg-gray-950 backdrop:opacity-90 backdrop:blur-xs cursor-auto'>
 											<div className='flex flex-col items-center justify-between gap-4 w-full h-full'>
 												{editingNoteId === note.documentId ? (
 													<>
 														<section className='flex flex-col w-full gap-2'>
 															<label htmlFor='noteTitle' className='flex w-fit gap-1'>
-																<span>Titulo</span>
+																<span className='text-cyan-200 font-semibold'>Titulo</span>
 															</label>
 															<input
 																type='text'
@@ -93,7 +93,7 @@ const NoteArticle = ({
 														</section>
 														<section className='flex flex-col w-full gap-2'>
 															<label htmlFor='noteDescrip' className='flex w-fit gap-1'>
-																<span>Descripción</span>
+																<span className='text-cyan-200 font-semibold'>Descripción</span>
 															</label>
 															<textarea
 																name='noteDescrip'
@@ -134,7 +134,7 @@ const NoteArticle = ({
 														<span className='break-words whitespace-normal my-4 text-start self-start'>
 															{note.text_note}
 														</span>
-														<div className='flex w-full justify-between gap-2'>
+														<div className='flex w-full justify-between gap-2 border-t-1 border-[#e5e7eb] py-2'>
 															<button
 																className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:border-blue-700 focus:outline-none'
 																onClick={() => handleDeleteNote(note.documentId)}>
