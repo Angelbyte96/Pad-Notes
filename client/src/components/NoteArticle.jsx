@@ -6,8 +6,10 @@ import { format } from '@formkit/tempo'
 
 const NoteArticle = ({
 	notes,
+	setNoteTitle,
 	noteTitle,
 	editingNoteId,
+	setEditingNoteId,
 	isLoading,
 	error,
 	handleUpdate,
@@ -61,24 +63,45 @@ const NoteArticle = ({
 									key={note.id}
 									className='flex flex-col bg-cyan-900 py-2 px-4 rounded-xl items-center justify-between gap-2 w-full text-lg group h-full cursor-pointer relative'
 									onClick={() => abrirModal(note.id)}>
-									<span className='uppercase self-start text-cyan-200 font-bold'>{note.title}</span>
-									<span className='self-start text-white w-full whitespace-nowrap overflow-hidden text-ellipsis mb-2.5'>{note.text_note}</span>
+									<span className='uppercase self-start text-cyan-200 font-bold'>
+										{note.title}
+									</span>
+									<span className='self-start text-white w-full whitespace-nowrap overflow-hidden text-ellipsis mb-2.5'>
+										{note.text_note}
+									</span>
 									{notaActiva === note.id && (
 										<Modal
 											isOpen={true}
 											onClose={cerrarModal}
+											setEditingNoteId={setEditingNoteId}
 											className='self-center justify-self-center justify-center text-white p-4 rounded-lg w-11/12 md:w-6/12 text-center bg-cyan-900 backdrop:bg-gray-950 backdrop:opacity-90 backdrop:blur-xs cursor-auto'>
-											<div className='flex flex-col items-center justify-between gap-2 w-full h-full'>
+											<div className='flex flex-col items-center justify-between gap-4 w-full h-full'>
 												{editingNoteId === note.documentId ? (
 													<>
-														<textarea
-															value={noteTitle}
-															className='break-all whitespace-normal w-full field-sizing-content text-center uppercase resize-none border-1 border-[#ccc]'
-															onChange={e => setNoteTitle(e.target.value)}></textarea>
-														<textarea
-															value={noteMessage}
-															className='break-all whitespace-normal w-full field-sizing-content text-center resize-none border-1 border-[#ccc] grow'
-															onChange={e => setNoteMessage(e.target.value)}></textarea>
+														<section className='flex flex-col w-full gap-2'>
+															<label htmlFor='noteTitle' className='flex w-fit gap-1'>
+																<span>Titulo</span>
+															</label>
+															<input
+																type='text'
+																value={noteTitle}
+																className='break-all whitespace-normal w-full field-sizing-content px-2 py-1 text-start uppercase resize-none rounded-lg border-1 border-[#e5e7eb] focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent'
+																onChange={e => setNoteTitle(e.target.value)}
+																name='noteTitle'
+																id='noteTitle'
+															/>
+														</section>
+														<section className='flex flex-col w-full gap-2'>
+															<label htmlFor='noteDescrip' className='flex w-fit gap-1'>
+																<span>Descripción</span>
+															</label>
+															<textarea
+																name='noteDescrip'
+																id='noteDescrip'
+																value={noteMessage}
+																className='break-words whitespace-normal field-sizing-content w-full px-2 py-1 text-start resize-none border-1 border-[#ccc] focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent rounded-lg min-h-10'
+																onChange={e => setNoteMessage(e.target.value)}></textarea>
+														</section>
 														<div className='flex self-end gap-4'>
 															<button
 																className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
@@ -105,8 +128,10 @@ const NoteArticle = ({
 															<span>Creado: </span>
 															<span>{dateCreated}</span>
 														</div>
-														<h2 className='uppercase font-bold text-cyan-200 text-xl'>{note.title}</h2>
-														<span className='break-words whitespace-normal my-4'>
+														<h2 className='uppercase font-bold text-cyan-200 text-xl self-start'>
+															{note.title}
+														</h2>
+														<span className='break-words whitespace-normal my-4 text-start self-start'>
 															{note.text_note}
 														</span>
 														<div className='flex w-full justify-between gap-2'>

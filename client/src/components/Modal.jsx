@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { Minimize2 } from 'lucide-react'
 
-const Modal = ({ isOpen, onClose, children, className }) => {
+const Modal = ({ isOpen, onClose, children, className, setEditingNoteId }) => {
 	const dialogRef = useRef(null)
 	const initialFocusRef = useRef(null)
 
@@ -24,6 +24,7 @@ const Modal = ({ isOpen, onClose, children, className }) => {
 	const handleBackdropClick = e => {
 		if (e.target === e.currentTarget) {
 			handleClose()
+			setEditingNoteId(null)
 		}
 	}
 
