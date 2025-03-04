@@ -3,6 +3,7 @@ import { Minimize2 } from 'lucide-react'
 
 const Modal = ({ isOpen, onClose, children, className }) => {
 	const dialogRef = useRef(null)
+	const initialFocusRef = useRef(null)
 
 	// Efecto para abrir y cerrar el modal según la propiedad isOpen
 	useEffect(() => {
@@ -33,6 +34,7 @@ const Modal = ({ isOpen, onClose, children, className }) => {
 			onClose={handleClose}
 			onCancel={handleClose}
 			className={className}>
+			<span ref={initialFocusRef} tabIndex='-1'></span>
 			{children}
 			<button
 				onClick={handleClose}

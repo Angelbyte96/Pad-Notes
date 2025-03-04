@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Trash2, SquarePen, X, Check } from 'lucide-react'
 import { ButtonCopy } from './ButtonCopy'
 import { Modal } from '@/components/Modal'
+import { format } from '@formkit/tempo'
 
 const NoteArticle = ({
 	notes,
@@ -51,17 +52,22 @@ const NoteArticle = ({
 						{notes.map(note => {
 							const isUnchanged =
 								noteTitle === note.title && noteMessage === note.text_note
+							const dateCreatedAt = note.createdAt
+							const dateCreated = format(dateCreatedAt, 'D MMMM YYYY', 'es')
+							const dateUpdatedAt = note.updatedAt
+							const dateUpdated = format(dateUpdatedAt, 'DD/MM/YYYY, h:mm a', 'es')
 							return (
 								<li
 									key={note.id}
-									className='flex flex-col bg-cyan-900 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group h-full cursor-pointer relative'
+									className='flex flex-col bg-cyan-900 py-2 px-4 rounded-xl items-center justify-between gap-2 w-full text-lg group h-full cursor-pointer relative'
 									onClick={() => abrirModal(note.id)}>
-									<span className='uppercase'>{note.title}</span>
+									<span className='uppercase self-start text-cyan-200 font-bold'>{note.title}</span>
+									<span className='self-start text-white w-full whitespace-nowrap overflow-hidden text-ellipsis mb-2.5'>{note.text_note}</span>
 									{notaActiva === note.id && (
 										<Modal
 											isOpen={true}
 											onClose={cerrarModal}
-											className='self-center justify-self-center justify-center text-white p-4 rounded-lg w-6/12 text-center bg-cyan-900 backdrop:bg-gray-950 backdrop:opacity-90 backdrop:blur-xs cursor-auto'>
+											className='self-center justify-self-center justify-center text-white p-4 rounded-lg w-11/12 md:w-6/12 text-center bg-cyan-900 backdrop:bg-gray-950 backdrop:opacity-90 backdrop:blur-xs cursor-auto'>
 											<div className='flex flex-col items-center justify-between gap-2 w-full h-full'>
 												{editingNoteId === note.documentId ? (
 													<>
@@ -95,13 +101,17 @@ const NoteArticle = ({
 													</>
 												) : (
 													<>
-														<p className='uppercase font-bold'>{note.title}</p>
-														<span className='break-all whitespace-normal'>
+														<div className='self-start text-sm'>
+															<span>Creado: </span>
+															<span>{dateCreated}</span>
+														</div>
+														<h2 className='uppercase font-bold text-cyan-200 text-xl'>{note.title}</h2>
+														<span className='break-all whitespace-normal my-4'>
 															{note.text_note}
 														</span>
 														<div className='flex w-full justify-between gap-2'>
 															<button
-																className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
+																className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:border-blue-700 focus:outline-none'
 																onClick={() => handleDeleteNote(note.documentId)}>
 																<Trash2
 																	size={20}
@@ -125,6 +135,10 @@ const NoteArticle = ({
 											</div>
 										</Modal>
 									)}
+									<div className='self-end text-xs md:text-base'>
+										<span>Actualizado: </span>
+										<span>{dateUpdated}</span>
+									</div>
 								</li>
 							)
 						})}
