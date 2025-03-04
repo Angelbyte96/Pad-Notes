@@ -10,7 +10,9 @@ const NoteArticle = ({
 	handleUpdate,
 	handleDeleteNote,
 	handleEditNote,
-	handleCancelEdit
+	handleCancelEdit,
+	noteMessage,
+	setNoteMessage
 }) => {
 	return (
 		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 py-4 rounded-md'>

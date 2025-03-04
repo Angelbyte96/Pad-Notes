@@ -21,7 +21,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const { handleDeleteNote, handleEditNote, handleCancelEdit } = useNotesActions(
 		{ STRAPI_URL, token, onNoteAdded, setEditingNoteId, setNoteTitle, setNoteMessage }
 	)
-	
+
 	const fetchNotes = useCallback(async () => {
 		try {
 			setIsLoading(true)
@@ -91,6 +91,8 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 			handleEditNote={handleEditNote}
 			handleCancelEdit={handleCancelEdit}
 			editingNoteId={editingNoteId}
+			noteMessage={noteMessage}
+			setNoteMessage={setNoteMessage}
 		/>
 	)
 }
