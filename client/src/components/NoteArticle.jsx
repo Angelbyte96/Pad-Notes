@@ -106,7 +106,7 @@ const NoteArticle = ({
 															<span>{dateCreated}</span>
 														</div>
 														<h2 className='uppercase font-bold text-cyan-200 text-xl'>{note.title}</h2>
-														<span className='break-all whitespace-normal my-4'>
+														<span className='break-words whitespace-normal my-4'>
 															{note.text_note}
 														</span>
 														<div className='flex w-full justify-between gap-2'>
