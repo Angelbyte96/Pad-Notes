@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { Trash2, SquarePen, X, Check } from 'lucide-react'
 import { ButtonCopy } from './ButtonCopy'
+import { Modal } from '@/components/Modal'
 
 const NoteArticle = ({
 	notes,
@@ -14,6 +16,11 @@ const NoteArticle = ({
 	noteMessage,
 	setNoteMessage
 }) => {
+	const [notaActiva, setNotaActiva] = useState(null)
+
+	const abrirModal = notaId => setNotaActiva(notaId)
+	const cerrarModal = () => setNotaActiva(null)
+
 	return (
 		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 py-4 rounded-md'>
 			<h1 className='text-2xl md:text-4xl text-white'>Tus notas</h1>
@@ -47,68 +54,77 @@ const NoteArticle = ({
 							return (
 								<li
 									key={note.id}
-									className='flex flex-col bg-cyan-900 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group h-full'>
-									<div className='flex flex-col items-center justify-between gap-2 w-full h-full'>
-										{editingNoteId === note.documentId ? (
-											<>
-												<textarea
-													value={noteTitle}
-													className='break-all whitespace-normal w-full field-sizing-content text-center uppercase resize-none border-1 border-[#ccc]'
-													onChange={e => setNoteTitle(e.target.value)}></textarea>
-												<textarea
-													value={noteMessage}
-													className='break-all whitespace-normal w-full field-sizing-content text-center resize-none border-1 border-[#ccc] grow'
-													onChange={e => setNoteMessage(e.target.value)}></textarea>
-												<div className='flex self-end gap-4'>
-													<button
-														className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
-														onClick={handleCancelEdit}>
-														<X
-															size={20}
-															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
-														/>
-													</button>
-													<button
-														className='bg-green-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer disabled:bg-gray-500'
-														onClick={handleUpdate}
-														disabled={isUnchanged}>
-														<Check
-															size={20}
-															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
-														/>
-													</button>
-												</div>
-											</>
-										) : (
-											<>
-												<p className='uppercase font-bold'>{note.title}</p>
-												<span className='break-all whitespace-normal'>
-													{note.text_note}
-												</span>
-												<div className='flex w-full justify-between gap-2'>
-													<button
-														className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
-														onClick={() => handleDeleteNote(note.documentId)}>
-														<Trash2
-															size={20}
-															className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
-														/>
-													</button>
-													<div className='flex gap-2'>
-														<ButtonCopy note={note.text_note} />
-														<button
-															className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
-															onClick={() => handleEditNote(note)}>
-															<SquarePen
-																size={20}
-																className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
-															/>
-														</button>
-													</div>
-												</div>
-											</>
-										)}
-									</div>
+									className='flex flex-col bg-cyan-900 p-2 rounded-xl items-center justify-between gap-2 w-full text-lg group h-full cursor-pointer relative'
+									onClick={() => abrirModal(note.id)}>
+									<span className='uppercase'>{note.title}</span>
+									{notaActiva === note.id && (
+										<Modal
+											isOpen={true}
+											onClose={cerrarModal}
+											className='self-center justify-self-center justify-center text-white p-4 rounded-lg w-6/12 text-center bg-cyan-900 backdrop:bg-gray-950 backdrop:opacity-90 backdrop:blur-xs cursor-auto'>
+											<div className='flex flex-col items-center justify-between gap-2 w-full h-full'>
+												{editingNoteId === note.documentId ? (
+													<>
+														<textarea
+															value={noteTitle}
+															className='break-all whitespace-normal w-full field-sizing-content text-center uppercase resize-none border-1 border-[#ccc]'
+															onChange={e => setNoteTitle(e.target.value)}></textarea>
+														<textarea
+															value={noteMessage}
+															className='break-all whitespace-normal w-full field-sizing-content text-center resize-none border-1 border-[#ccc] grow'
+															onChange={e => setNoteMessage(e.target.value)}></textarea>
+														<div className='flex self-end gap-4'>
+															<button
+																className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer'
+																onClick={handleCancelEdit}>
+																<X
+																	size={20}
+																	className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+																/>
+															</button>
+															<button
+																className='bg-green-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer disabled:bg-gray-500'
+																onClick={handleUpdate}
+																disabled={isUnchanged}>
+																<Check
+																	size={20}
+																	className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+																/>
+															</button>
+														</div>
+													</>
+												) : (
+													<>
+														<p className='uppercase font-bold'>{note.title}</p>
+														<span className='break-all whitespace-normal'>
+															{note.text_note}
+														</span>
+														<div className='flex w-full justify-between gap-2'>
+															<button
+																className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
+																onClick={() => handleDeleteNote(note.documentId)}>
+																<Trash2
+																	size={20}
+																	className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+																/>
+															</button>
+															<div className='flex gap-2'>
+																<ButtonCopy note={note.text_note} />
+																<button
+																	className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
+																	onClick={() => handleEditNote(note)}>
+																	<SquarePen
+																		size={20}
+																		className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+																	/>
+																</button>
+															</div>
+														</div>
+													</>
+												)}
+											</div>
+										</Modal>
+									)}
 								</li>
 							)
 						})}
