@@ -136,7 +136,7 @@ const NoteArticle = ({
 										</Modal>
 									)}
 									<div className='self-end text-xs md:text-base'>
-										<span>Actualizado: </span>
+										<span>Editado: </span>
 										<span>{dateUpdated}</span>
 									</div>
 								</li>
