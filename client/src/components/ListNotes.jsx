@@ -76,8 +76,10 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 			handleEditNote={handleEditNote}
 			handleCancelEdit={handleCancelEdit}
 			editingNoteId={editingNoteId}
+			setEditingNoteId={setEditingNoteId}
 			noteMessage={noteMessage}
 			setNoteMessage={setNoteMessage}
+			setNoteTitle={setNoteTitle}
 		/>
 	)
 }
