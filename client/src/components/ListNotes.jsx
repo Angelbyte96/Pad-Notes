@@ -11,16 +11,25 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const [error, setError] = useState(null)
 	const [editingNoteId, setEditingNoteId] = useState(null)
-	
+
 	// Obtenemos el usuario desde localStorage
 	const storedUser = window.localStorage.getItem('user')
 	const user = storedUser ? JSON.parse(storedUser) : null
 	const token = user ? user.token : null
 	const userId = user ? user.id : null
-	
-	const { handleDeleteNote, handleEditNote, handleCancelEdit } = useNotesActions(
-		{ STRAPI_URL, token, onNoteAdded, setEditingNoteId, setNoteTitle, setNoteMessage }
-	)
+
+	const { handleDeleteNote, handleEditNote, handleCancelEdit, handleUpdate } =
+		useNotesActions({
+			STRAPI_URL,
+			token,
+			onNoteAdded,
+			setEditingNoteId,
+			setNoteTitle,
+			setNoteMessage,
+			editingNoteId,
+			noteTitle,
+			noteMessage
+		})
 
 	const fetchNotes = useCallback(async () => {
 		try {
@@ -50,30 +59,6 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 
 		fetchNotes()
 	}, [token, userId, refreshTrigger])
-
-	const handleUpdate = async e => {
-		e.preventDefault()
-
-		try {
-			const response = await fetch(`${STRAPI_URL}/api/note/${editingNoteId}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`
-				},
-				body: JSON.stringify({ data: { title: noteTitle, text_note: noteMessage } })
-			})
-
-			if (!response.ok) throw new Error('Error al enviar la nota')
-
-			setNoteTitle('')
-			setNoteMessage('')
-			onNoteAdded()
-			setEditingNoteId(null)
-		} catch (error) {
-			console.error(error)
-		}
-	}
 
 	// Renderizamos un mensaje de usuario no autentificado sin retornar anticipadamente
 	if (!user) {

@@ -6,7 +6,10 @@ const useNotesActions = ({
 	onNoteAdded,
 	setEditingNoteId,
 	setNoteTitle,
-	setNoteMessage
+	setNoteMessage,
+	editingNoteId,
+	noteTitle,
+    noteMessage
 }) => {
 	const handleDeleteNote = useCallback(
 		async noteToDelete => {
@@ -36,7 +39,31 @@ const useNotesActions = ({
 		setEditingNoteId(null)
 	}, [setEditingNoteId])
 
-	return { handleDeleteNote, handleEditNote, handleCancelEdit }
+	const handleUpdate = async e => {
+		e.preventDefault()
+
+		try {
+			const response = await fetch(`${STRAPI_URL}/api/note/${editingNoteId}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`
+				},
+				body: JSON.stringify({ data: { title: noteTitle, text_note: noteMessage } })
+			})
+
+			if (!response.ok) throw new Error('Error al enviar la nota')
+
+			setNoteTitle('')
+			setNoteMessage('')
+			onNoteAdded()
+			setEditingNoteId(null)
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
+	return { handleDeleteNote, handleEditNote, handleCancelEdit, handleUpdate }
 }
 
 export { useNotesActions }
