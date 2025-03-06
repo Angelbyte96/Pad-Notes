@@ -144,7 +144,7 @@ const NoteArticle = ({
 																/>
 															</button>
 															<div className='flex gap-2'>
-																<ButtonCopy note={note.text_note} />
+																<ButtonCopy note={note.text_note} setNotaActiva={setNotaActiva}/>
 																<button
 																	className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
 																	onClick={() => handleEditNote(note)}>

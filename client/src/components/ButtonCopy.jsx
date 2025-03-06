@@ -1,12 +1,15 @@
 import { Copy } from 'lucide-react'
 import { toast } from '@pheralb/toast'
 
-const ButtonCopy = ({ note }) => {
-	const handleCopyNote = () => {
+const ButtonCopy = ({ note, setNotaActiva }) => {
+	const handleCopyNote = (e) => {
+		e.stopPropagation()
+
 		navigator.clipboard.writeText(note)
 		toast.default({
 			text: 'Nota copiada al portapapeles ✨'
 		})
+		setNotaActiva(null)
 	}
 
 	return (
