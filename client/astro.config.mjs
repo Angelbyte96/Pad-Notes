@@ -12,10 +12,10 @@ export default defineConfig({
       },
       dedupe: ['react', 'react-dom']
     },
-    // No incluimos "tslib" en optimizeDeps
     build: {
       rollupOptions: {
-        external: ['tslib'], // Se marca como externo
+        // Le indicamos a Rollup que trate "tslib" como externo
+        external: ['tslib'],
         output: {
           manualChunks: {
             'framework': ['react', 'react-dom']
@@ -25,7 +25,8 @@ export default defineConfig({
     }
   },
   integrations: [react()],
+  // Con esta opción nos aseguramos de que la carpeta de "tslib" se copie a la build final
   adapter: vercel({
-    includeFiles: ['./node_modules/tslib/**/*'] // Se copia la carpeta de tslib en la build
+    includeFiles: ['./node_modules/tslib/**/*']
   })
 });
