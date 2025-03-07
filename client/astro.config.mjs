@@ -6,28 +6,31 @@ import vercel from '@astrojs/vercel'
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()],
-    resolve: {
-      alias: {
-        '@/': './src'
-      },
-      dedupe: ['react', 'react-dom']
+    vite: {
+        plugins: [tailwindcss()],
+        resolve: {
+            alias: {
+                '@/': './src',
+                'tslib': './node_modules/tslib/tslib.es6.js'
+            },
+            dedupe: ['react', 'react-dom']
+        },
+        optimizeDeps: {
+            include: ['tslib']
+        },
+        build: {
+            rollupOptions: {
+                output: {
+                    manualChunks: {
+                        'framework': ['react', 'react-dom'],
+                        'tslib': ['tslib']
+                    }
+                }
+            }
+        },
     },
-    optimizeDeps: {
-      include: ['tslib']
-    },
-    build: {
-      rollupOptions: {
-        external: ['tslib'],
-        output: {
-          paths: {
-            tslib: './node_modules/tslib/tslib.es6.js'
-          }
-        }
-      }
-    }
-  },
-  integrations: [react()],
-  adapter: vercel()
+    integrations: [react()],
+    adapter: vercel({
+        includeFiles: ['./node_modules/tslib/**/*']
+    })
 })
