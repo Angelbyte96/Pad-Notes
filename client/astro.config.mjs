@@ -17,10 +17,10 @@ export default defineConfig({
     },
     build: {
       rollupOptions: {
+        external: ['tslib'],
         output: {
           manualChunks: {
             'framework': ['react', 'react-dom']
-            // Se elimina la división manual de 'tslib'
           }
         }
       }
