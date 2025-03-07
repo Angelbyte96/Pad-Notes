@@ -1,10 +1,8 @@
-// @ts-check
 import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@astrojs/react'
 import vercel from '@astrojs/vercel'
 
-// https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
@@ -15,19 +13,21 @@ export default defineConfig({
       dedupe: ['react', 'react-dom']
     },
     optimizeDeps: {
-      include: ['tslib']
+      // Ya no es necesario incluir 'tslib'
     },
     build: {
       rollupOptions: {
         external: ['tslib'],
         output: {
-          paths: {
-            tslib: './node_modules/tslib/tslib.es6.js'
+          manualChunks: {
+            'framework': ['react', 'react-dom']
           }
         }
       }
     }
   },
   integrations: [react()],
-  adapter: vercel()
+  adapter: vercel({
+    includeFiles: ['./node_modules/tslib/**/*']
+  })
 })
