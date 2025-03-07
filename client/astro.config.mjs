@@ -12,9 +12,6 @@ export default defineConfig({
       },
       dedupe: ['react', 'react-dom']
     },
-    optimizeDeps: {
-      include: ['tslib']
-    },
     build: {
       rollupOptions: {
         output: {
