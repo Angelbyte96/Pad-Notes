@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Trash2, SquarePen, X, Check } from 'lucide-react'
 import { ButtonCopy } from './ButtonCopy'
-import { Modal } from '@/components/Modal'
 import { format } from '@formkit/tempo'
 import { ModalRadix } from '@/components/ModalRadix'
 
@@ -21,10 +20,6 @@ const NoteArticle = ({
 	setNoteMessage
 }) => {
 	const [notaActiva, setNotaActiva] = useState(null)
-
-	const abrirModal = notaId => setNotaActiva(notaId)
-	const cerrarModal = () => setNotaActiva(null)
-
 	return (
 		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 py-4 rounded-md'>
 			<h1 className='text-2xl md:text-4xl text-white'>Tus notas</h1>
@@ -147,10 +142,7 @@ const NoteArticle = ({
 															/>
 														</button>
 														<div className='flex gap-2'>
-															<ButtonCopy
-																note={note.text_note}
-																setNotaActiva={setNotaActiva}
-															/>
+															<ButtonCopy note={note.text_note} />
 															<button
 																className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
 																onClick={() => handleEditNote(note)}>
