@@ -1,7 +1,7 @@
 ---
-export const prerender = false
+export const prerender = true
 export async function getStaticPaths() {
-	const providers = ['github', 'google', 'twitter']
+	const providers = ['github', 'google', 'twitter', 'discord']
 	return providers.map(provider => ({ params: { provider } }))
 }
 

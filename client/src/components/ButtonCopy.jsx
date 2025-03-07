@@ -1,7 +1,7 @@
 import { Copy } from 'lucide-react'
 import { toast } from '@pheralb/toast'
 
-const ButtonCopy = ({ note, setNotaActiva }) => {
+const ButtonCopy = ({ note }) => {
 	const handleCopyNote = (e) => {
 		e.stopPropagation()
 
@@ -9,7 +9,6 @@ const ButtonCopy = ({ note, setNotaActiva }) => {
 		toast.default({
 			text: 'Nota copiada al portapapeles ✨'
 		})
-		setNotaActiva(null)
 	}
 
 	return (
