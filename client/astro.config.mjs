@@ -13,11 +13,10 @@ export default defineConfig({
       dedupe: ['react', 'react-dom']
     },
     optimizeDeps: {
-      // Ya no es necesario incluir 'tslib'
+      include: ['tslib']
     },
     build: {
       rollupOptions: {
-        external: ['tslib'],
         output: {
           manualChunks: {
             'framework': ['react', 'react-dom']
