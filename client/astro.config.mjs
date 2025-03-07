@@ -2,7 +2,6 @@ import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@astrojs/react'
 import vercel from '@astrojs/vercel'
-import { resolve } from 'path'
 
 export default defineConfig({
   vite: {
@@ -10,13 +9,13 @@ export default defineConfig({
     resolve: {
       alias: {
         '@/': './src',
-        // Se resuelve "tslib" a una ruta absoluta
-        'tslib': resolve('./node_modules/tslib/tslib.es6.js')
+        // Cambiamos el alias para que resuelva a "tslib/tslib.js"
+        'tslib': 'tslib/tslib.js'
       },
       dedupe: ['react', 'react-dom']
     },
     optimizeDeps: {
-      include: ['tslib']
+      // No es necesario incluir "tslib" acá ya que se resolverá correctamente
     },
     build: {
       rollupOptions: {
