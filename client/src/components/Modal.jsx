@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+/* import { useRef, useEffect } from 'react'
 import { Minimize2 } from 'lucide-react'
 
 const Modal = ({ isOpen, onClose, children, className, setEditingNoteId }) => {
@@ -47,3 +47,4 @@ const Modal = ({ isOpen, onClose, children, className, setEditingNoteId }) => {
 }
 
 export { Modal }
+ */

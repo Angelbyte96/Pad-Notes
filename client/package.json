@@ -13,6 +13,7 @@
     "@astrojs/vercel": "^8.0.8",
     "@formkit/tempo": "^0.1.2",
     "@pheralb/toast": "^1.0.0",
+    "@radix-ui/react-dialog": "^1.1.6",
     "@tailwindcss/vite": "^4.0.3",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
