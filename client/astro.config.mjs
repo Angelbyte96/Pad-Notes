@@ -1,24 +1,21 @@
-import { defineConfig } from 'astro/config'
-import tailwindcss from '@tailwindcss/vite'
-import react from '@astrojs/react'
-import vercel from '@astrojs/vercel'
+import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
+import react from '@astrojs/react';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        '@/': './src',
-        // Cambiamos el alias para que resuelva a "tslib/tslib.js"
-        'tslib': 'tslib/tslib.js'
+        '@/': './src'
       },
       dedupe: ['react', 'react-dom']
     },
-    optimizeDeps: {
-      // No es necesario incluir "tslib" acá ya que se resolverá correctamente
-    },
+    // No incluimos "tslib" en optimizeDeps
     build: {
       rollupOptions: {
+        external: ['tslib'], // Se marca como externo
         output: {
           manualChunks: {
             'framework': ['react', 'react-dom']
@@ -29,6 +26,6 @@ export default defineConfig({
   },
   integrations: [react()],
   adapter: vercel({
-    includeFiles: ['./node_modules/tslib/**/*']
+    includeFiles: ['./node_modules/tslib/**/*'] // Se copia la carpeta de tslib en la build
   })
-})
+});
