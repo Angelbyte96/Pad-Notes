@@ -21,6 +21,7 @@ const NoteArticle = ({
 	setNoteMessage,
 	onNoteAdded
 }) => {
+	const [isOpen, setIsOpen] = useState(false)
 	return (
 		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 py-4 rounded-md'>
 			<h1 className='text-2xl md:text-4xl text-white text-center'>Tus notas</h1>
@@ -136,14 +137,42 @@ const NoteArticle = ({
 														{note.text_note}
 													</p>
 													<div className='flex w-full justify-between gap-2 border-t-1 border-[#e5e7eb] py-2'>
-														<button
+														{/* <button
 															className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:border-blue-700 focus:outline-none'
 															onClick={() => handleDeleteNote(note.documentId)}>
 															<Trash2
 																size={20}
 																className='text-white p-0.5 hover:transform hover:animate-pulse'
 															/>
-														</button>
+														</button> */}
+														<ModalRadix
+															isOpen={isOpen}
+															onOpenChange={setIsOpen}
+															trigger={
+																<button className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:border-blue-700 focus:outline-none'>
+																	<Trash2
+																		size={20}
+																		className='text-white p-0.5 hover:transform hover:animate-pulse'
+																	/>
+																</button>
+															}>
+															<section className='flex flex-col gap-4'>
+																<h3>Estás seguro?</h3>
+																<p>Esta acción no se puede deshacer</p>
+																<div className='flex justify-end gap-2'>
+																	<button
+																		className='bg-slate-500 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
+																		onClick={() => setIsOpen(false)}>
+																		Volver
+																	</button>
+																	<button
+																		className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
+																		onClick={() => handleDeleteNote(note.documentId)}>
+																		Eliminar
+																	</button>
+																</div>
+															</section>
+														</ModalRadix>
 														<div className='flex gap-2'>
 															<ButtonCopy note={note.text_note} />
 															<button
