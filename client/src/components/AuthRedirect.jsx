@@ -22,7 +22,7 @@ const AuthRedirect = ({ provider }) => {
 							JSON.stringify({
 								token: data.jwt,
 								username: data.user.username,
-								id: data.user.documentId // O el campo que uses para identificar al usuario
+								id: data.user.documentId // campo usado para identificar al usuario en Strapi
 							})
 						)
 						navigate('/dashboard')
