@@ -111,7 +111,7 @@ const NoteArticle = ({
 															/>
 														</button>
 														<button
-															className='bg-green-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer disabled:bg-gray-500'
+															className='bg-green-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed'
 															onClick={handleUpdate}
 															disabled={isUnchanged}>
 															<Check
