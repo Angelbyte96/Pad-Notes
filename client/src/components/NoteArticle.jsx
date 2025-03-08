@@ -53,7 +53,7 @@ const NoteArticle = ({
 							const dateCreatedAt = note.createdAt
 							const dateCreated = format(dateCreatedAt, 'D MMMM YYYY', 'es')
 							const dateUpdatedAt = note.updatedAt
-							const dateUpdated = format(dateUpdatedAt, 'DD/MM/YYYY, h:mm a', 'es')
+							const dateUpdated = format(dateUpdatedAt, 'DD/MM/YY, h:mm a', 'es')
 							return (
 								<li key={note.id}>
 									<ModalRadix
