@@ -16,7 +16,7 @@ const ModalRadix = ({ children, trigger, title, description, isOpen, onOpenChang
 					<Dialog.Close asChild>
 						{
 							<button
-								className='absolute top-4 right-4 p-1 rounded-full hover:bg-slate-600'
+								className='absolute top-4 right-4 p-1 rounded-full hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-30'
 								aria-label='Cerrar'>
 								<Minimize2 width={20} height={20} />
 							</button>
