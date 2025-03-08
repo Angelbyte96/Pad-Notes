@@ -3,6 +3,7 @@ import { Trash2, SquarePen, X, Check } from 'lucide-react'
 import { ButtonCopy } from './ButtonCopy'
 import { format } from '@formkit/tempo'
 import { ModalRadix } from '@/components/ModalRadix'
+import { SendNotes } from '@/components/SendNotes'
 
 const NoteArticle = ({
 	notes,
@@ -17,12 +18,13 @@ const NoteArticle = ({
 	handleEditNote,
 	handleCancelEdit,
 	noteMessage,
-	setNoteMessage
+	setNoteMessage,
+	onNoteAdded
 }) => {
-	const [notaActiva, setNotaActiva] = useState(null)
 	return (
 		<div className='flex flex-col items-center gap-4 w-full bg-opacity-80 bg-slate-800 py-4 rounded-md'>
-			<h1 className='text-2xl md:text-4xl text-white'>Tus notas</h1>
+			<h1 className='text-2xl md:text-4xl text-white text-center'>Tus notas</h1>
+			<SendNotes onNoteAdded={onNoteAdded} />
 			{error ? (
 				<>
 					<p className='text-red-500 text-lg'>{error.message}</p>
