@@ -46,7 +46,7 @@ const NoteArticle = ({
 				</div>
 			) : (
 				<section className='flex flex-col w-full'>
-					<ul className='grid grid-cols-[repeat(auto-fit,_minmax(200px,1fr))] w-full items-stretch gap-4 text-white'>
+					<ul className='grid grid-cols-[repeat(auto-fit,_minmax(250px,1fr))] w-full items-stretch gap-4 text-white'>
 						{notes.map(note => {
 							const isUnchanged =
 								noteTitle === note.title && noteMessage === note.text_note
