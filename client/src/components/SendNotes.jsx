@@ -69,9 +69,9 @@ const SendNotes = ({ onNoteAdded }) => {
 							onChange={e => setNoteTitle(e.target.value)}
 							placeholder='Titulo'
 						/>
-						<input
+						<textarea
 							type='text'
-							className='p-1 w-full md:w-full bg-white rounded-md text-black'
+							className='p-1 w-full md:w-full bg-white rounded-md text-black break-words whitespace-normal field-sizing-content'
 							id='note'
 							name='note'
 							value={note}
