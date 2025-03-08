@@ -13,7 +13,7 @@ const ButtonCopy = ({ note }) => {
 
 	return (
 		<button
-			className='bg-gray-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
+			className='bg-gray-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-30'
 			onClick={handleCopyNote}>
 			<Copy
 				size={20}
