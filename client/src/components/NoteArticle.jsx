@@ -159,14 +159,14 @@ const NoteArticle = ({
 															<section className='flex flex-col gap-4'>
 																<h3>Estás seguro?</h3>
 																<p>Esta acción no se puede deshacer</p>
-																<div className='flex justify-end gap-2'>
+																<div className='flex justify-end gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-30'>
 																	<button
-																		className='bg-slate-500 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
+																		className='bg-slate-500 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-30'
 																		onClick={() => setIsOpen(false)}>
 																		Volver
 																	</button>
 																	<button
-																		className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
+																		className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-30'
 																		onClick={() => handleDeleteNote(note.documentId)}>
 																		Eliminar
 																	</button>
