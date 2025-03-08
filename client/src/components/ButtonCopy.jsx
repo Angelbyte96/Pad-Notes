@@ -17,7 +17,7 @@ const ButtonCopy = ({ note }) => {
 			onClick={handleCopyNote}>
 			<Copy
 				size={20}
-				className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+				className='text-white p-0.5 hover:transform hover:animate-pulse'
 			/>
 		</button>
 	)

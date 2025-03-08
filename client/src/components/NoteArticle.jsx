@@ -59,14 +59,14 @@ const NoteArticle = ({
 									<ModalRadix
 										client:only
 										trigger={
-											<div className='flex flex-col bg-cyan-900 py-2 px-4 rounded-xl items-center justify-between gap-2 w-full group h-full cursor-pointer relative'>
-												<span className='uppercase self-start text-cyan-200 font-bold'>
+											<div className='flex flex-col bg-cyan-900 py-2 px-4 rounded-xl items-center justify-center gap-2 w-full group h-full cursor-pointer relative'>
+												<h2 className='uppercase self-start text-cyan-200 font-bold md:text-xl'>
 													{note.title}
-												</span>
-												<span className='self-start text-white w-full whitespace-nowrap overflow-hidden text-ellipsis mb-2.5 text-sm'>
+												</h2>
+												<p className='self-start text-white md:text-lg w-full whitespace-nowrap overflow-hidden text-ellipsis mb-2.5 text-sm'>
 													{note.text_note}
-												</span>
-												<div className='self-end text-xs md:text-base'>
+												</p>
+												<div className='self-end text-xs md:text-sm'>
 													<span>Editado: </span>
 													<span>{dateUpdated}</span>
 												</div>
@@ -130,16 +130,16 @@ const NoteArticle = ({
 													<h2 className='uppercase font-bold text-cyan-200 text-xl self-start'>
 														{note.title}
 													</h2>
-													<span className='break-words whitespace-normal my-4 text-start self-start'>
+													<p className='break-words whitespace-normal my-4 text-start self-start'>
 														{note.text_note}
-													</span>
+													</p>
 													<div className='flex w-full justify-between gap-2 border-t-1 border-[#e5e7eb] py-2'>
 														<button
 															className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:border-blue-700 focus:outline-none'
 															onClick={() => handleDeleteNote(note.documentId)}>
 															<Trash2
 																size={20}
-																className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+																className='text-white p-0.5 hover:transform hover:animate-pulse'
 															/>
 														</button>
 														<div className='flex gap-2'>
@@ -149,7 +149,7 @@ const NoteArticle = ({
 																onClick={() => handleEditNote(note)}>
 																<SquarePen
 																	size={20}
-																	className='text-white p-0.5 group-hover:transform group-hover:animate-pulse'
+																	className='text-white p-0.5 hover:transform hover:animate-pulse'
 																/>
 															</button>
 														</div>
