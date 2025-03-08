@@ -1,9 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { Minimize2 } from 'lucide-react'
 
-const ModalRadix = ({ children, trigger, title, description }) => {
+const ModalRadix = ({ children, trigger, title, description, isOpen, onOpenChange }) => {
 	return (
-		<Dialog.Root>
+		<Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
 			<Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
 			<Dialog.Portal>
 				<Dialog.Overlay className='fixed inset-0 bg-black/50 backdrop-blur-sm z-50' />

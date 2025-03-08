@@ -80,6 +80,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 			noteMessage={noteMessage}
 			setNoteMessage={setNoteMessage}
 			setNoteTitle={setNoteTitle}
+			onNoteAdded={onNoteAdded}
 		/>
 	)
 }
