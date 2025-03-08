@@ -149,7 +149,7 @@ const NoteArticle = ({
 															isOpen={isOpen}
 															onOpenChange={setIsOpen}
 															trigger={
-																<button className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:border-blue-700 focus:outline-none'>
+																<button className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:outline-none focus:ring-1	 focus:ring-white focus:ring-opacity-30'>
 																	<Trash2
 																		size={20}
 																		className='text-white p-0.5 hover:transform hover:animate-pulse'
@@ -176,7 +176,7 @@ const NoteArticle = ({
 														<div className='flex gap-2'>
 															<ButtonCopy note={note.text_note} />
 															<button
-																className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105'
+																className='bg-blue-400 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-30'
 																onClick={() => handleEditNote(note)}>
 																<SquarePen
 																	size={20}
