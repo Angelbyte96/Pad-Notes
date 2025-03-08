@@ -167,7 +167,10 @@ const NoteArticle = ({
 																	</button>
 																	<button
 																		className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-30'
-																		onClick={() => handleDeleteNote(note.documentId)}>
+																		onClick={() => {
+																			handleDeleteNote(note.documentId)
+																			setIsOpen(false)
+																		}}>
 																		Eliminar
 																	</button>
 																</div>
