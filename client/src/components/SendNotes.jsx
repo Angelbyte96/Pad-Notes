@@ -36,6 +36,8 @@ const SendNotes = ({ onNoteAdded }) => {
 		}
 	}
 
+	const isUnchanged = noteTitle === '' || note === ''
+
 	return (
 		<section id='sendNotes' className='flex flex-col items-center w-full gap-4'>
 			<h3 className='text-xl md:text-2xl text-white'>Ingresa alguna nota</h3>
@@ -60,7 +62,9 @@ const SendNotes = ({ onNoteAdded }) => {
 					onChange={e => setNote(e.target.value)}
 					placeholder='Escribe tu nota aquí'
 				/>
-				<button className='bg-cyan-600 p-1 rounded-md font-semibold text-white cursor-pointer'>
+				<button
+					className='bg-cyan-600 p-1 rounded-md font-semibold text-white cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed'
+					disabled={isUnchanged}>
 					Guardar
 				</button>
 			</form>
