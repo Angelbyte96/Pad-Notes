@@ -57,6 +57,7 @@ const NoteArticle = ({
 							return (
 								<li key={note.id}>
 									<ModalRadix
+										client:only
 										trigger={
 											<div className='flex flex-col bg-cyan-900 py-2 px-4 rounded-xl items-center justify-between gap-2 w-full text-lg group h-full cursor-pointer relative'>
 												<span className='uppercase self-start text-cyan-200 font-bold'>
