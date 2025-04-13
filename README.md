@@ -1,5 +1,5 @@
 
-# 📝 Notas App - Gestión de Notas con Autenticación
+# 📝 PAD NOTES - Gestión de Notas con Autenticación
 
 Una aplicación web para crear y gestionar notas personales, con autenticación de usuarios integrada usando Strapi como backend.
 
