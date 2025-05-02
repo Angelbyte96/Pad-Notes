@@ -26,10 +26,9 @@ const Dashboard = () => {
 			</h2>
 
 			{/* Sección para ingresar notas */}
-			<section className="bg-opacity-80 flex w-11/12 flex-col items-center gap-4 rounded-lg bg-slate-800 p-4 md:w-10/12">
-				<ListNotes refreshTrigger={refreshNotes} onNoteAdded={handleNoteAdded} />
-			</section>
-			<button className="rounded-lg bg-red-500 p-1 text-white" onClick={handleLogout}>
+			<ListNotes refreshTrigger={refreshNotes} onNoteAdded={handleNoteAdded} />
+			
+			<button className="rounded-lg bg-red-700 py-1 px-2 text-white font-semibold hover:cursor-pointer hover:bg-red-800" onClick={handleLogout}>
 				Cerrar sesión
 			</button>
 		</section>
