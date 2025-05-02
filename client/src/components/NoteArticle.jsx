@@ -22,8 +22,8 @@ const NoteArticle = ({
 }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	return (
-		<div className="bg-opacity-80 flex w-full flex-col items-center gap-4 rounded-md bg-slate-800 py-4">
-			<h1 className="text-center text-2xl text-white md:text-4xl">Tus notas</h1>
+		<div className="bg-opacity-80 flex w-10/12 flex-col items-center gap-4 rounded-md border-[1px] border-gray-300 bg-slate-50 p-4 shadow-md shadow-black/30 backdrop-blur-sm">
+			<h1 className="text-center text-2xl text-black md:text-4xl font-semibold">Tus notas</h1>
 			<SendNotes onNoteAdded={onNoteAdded} />
 			{error ? (
 				<>
@@ -46,7 +46,7 @@ const NoteArticle = ({
 				</div>
 			) : (
 				<section className="flex w-full flex-col">
-					<ul className="grid w-full grid-cols-[repeat(auto-fit,_minmax(250px,1fr))] items-stretch gap-4 text-white">
+					<ul className="grid w-full grid-cols-[repeat(auto-fit,_minmax(250px,1fr))] items-stretch gap-4 text-black">
 						{notes.map((note) => {
 							const isUnchanged = noteTitle === note.title && noteMessage === note.text_note
 							const dateCreatedAt = note.createdAt
@@ -58,14 +58,14 @@ const NoteArticle = ({
 									<ModalRadix
 										client:only
 										trigger={
-											<div className="group relative flex h-full w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl bg-cyan-900 px-4 py-2">
-												<h2 className="self-start font-bold text-cyan-200 uppercase md:text-xl">
+											<div className="group relative flex h-full w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-[1px] border-[#e5e5e5] bg-white px-4 py-2 shadow-md shadow-black/30 backdrop-blur-sm hover:bg-slate-50 hover:shadow-black/50">
+												<h2 className="self-start font-bold text-black uppercase md:text-xl">
 													{note.title}
 												</h2>
-												<p className="mb-2.5 w-full self-start overflow-hidden text-sm text-ellipsis whitespace-nowrap text-white md:text-lg">
+												<p className="mb-2.5 w-full self-start overflow-hidden text-sm text-ellipsis whitespace-nowrap text-black md:text-lg">
 													{note.text_note}
 												</p>
-												<div className="self-end text-xs md:text-sm">
+												<div className="self-end text-xs text-[#808692] md:text-sm">
 													<span>Editado: </span>
 													<span>{dateUpdated}</span>
 												</div>
@@ -79,12 +79,12 @@ const NoteArticle = ({
 												<>
 													<section className="flex w-full flex-col gap-2">
 														<label htmlFor="noteTitle" className="flex w-fit gap-1">
-															<span className="font-semibold text-cyan-200">Titulo</span>
+															<span className="font-semibold text-slate-800">Titulo</span>
 														</label>
 														<input
 															type="text"
 															value={noteTitle}
-															className="field-sizing-content w-full resize-none rounded-lg border-1 border-[#e5e7eb] px-2 py-1 text-start break-all whitespace-normal uppercase focus:border-transparent focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+															className="field-sizing-content w-full resize-none rounded-lg border-1 border-[#e5e7eb] px-2 py-1 text-start break-all whitespace-normal uppercase focus:border-transparent focus:ring-2 focus:ring-slate-700 focus:outline-none"
 															onChange={(e) => setNoteTitle(e.target.value)}
 															name="noteTitle"
 															id="noteTitle"
@@ -92,13 +92,13 @@ const NoteArticle = ({
 													</section>
 													<section className="flex w-full flex-col gap-2">
 														<label htmlFor="noteDescrip" className="flex w-fit gap-1">
-															<span className="font-semibold text-cyan-200">Descripción</span>
+															<span className="font-semibold text-slate-800">Descripción</span>
 														</label>
 														<textarea
 															name="noteDescrip"
 															id="noteDescrip"
 															value={noteMessage}
-															className="field-sizing-content min-h-10 w-full resize-none rounded-lg border-1 border-[#ccc] px-2 py-1 text-start break-words whitespace-normal focus:border-transparent focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+															className="field-sizing-content min-h-10 w-full resize-none rounded-lg border-1 border-[#ccc] px-2 py-1 text-start break-words whitespace-normal focus:border-transparent focus:ring-2 focus:ring-slate-800 focus:outline-none"
 															onChange={(e) => setNoteMessage(e.target.value)}
 														></textarea>
 													</section>
@@ -130,7 +130,7 @@ const NoteArticle = ({
 														<span>Creado: </span>
 														<span>{dateCreated}</span>
 													</div>
-													<h2 className="self-start text-xl font-bold text-cyan-200 uppercase">
+													<h2 className="self-start text-xl font-bold text-black uppercase">
 														{note.title}
 													</h2>
 													<p className="my-4 self-start text-start break-words whitespace-normal">
@@ -162,13 +162,13 @@ const NoteArticle = ({
 																<p>Esta acción no se puede deshacer</p>
 																<div className="focus:ring-opacity-30 flex justify-end gap-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
 																	<button
-																		className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-slate-500 px-2.5 py-[0.1rem] text-sm font-semibold transition hover:scale-105 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+																		className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-slate-500 px-2.5 py-[0.1rem] text-sm font-semibold transition hover:scale-105 focus:ring-2 focus:ring-blue-200 focus:outline-none text-white"
 																		onClick={() => setIsOpen(false)}
 																	>
 																		Volver
 																	</button>
 																	<button
-																		className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-red-700 px-2.5 py-[0.1rem] text-sm font-semibold transition hover:scale-105 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+																		className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-red-700 px-2.5 py-[0.1rem] text-sm font-semibold transition hover:scale-105 focus:ring-2 focus:ring-blue-200 focus:outline-none text-white"
 																		onClick={() => {
 																			handleDeleteNote(note.documentId)
 																			setIsOpen(false)

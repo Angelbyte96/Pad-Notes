@@ -48,7 +48,7 @@ const SendNotes = ({ onNoteAdded }) => {
 				isOpen={isOpen}
 				onOpenChange={setIsOpen}
 				trigger={
-					<button className="flex cursor-pointer items-center gap-2 self-end rounded-md bg-green-700 p-1 font-semibold text-white">
+					<button className="flex cursor-pointer items-center gap-2 self-end rounded-md bg-green-700 px-2 py-1 font-semibold text-white hover:bg-green-800">
 						Nueva nota{' '}
 						<span>
 							<StickyNote width={18} height={18} />
@@ -57,7 +57,7 @@ const SendNotes = ({ onNoteAdded }) => {
 				}
 			>
 				<section id="sendNotes" className="flex w-full flex-col items-center gap-4">
-					<h3 className="text-xl text-white md:text-2xl">Ingresa alguna nota</h3>
+					<h3 className="text-xl text-black md:text-2xl">Ingresa alguna nota</h3>
 					<form className="flex w-full flex-col justify-center gap-2" onSubmit={handleSubmit}>
 						<input
 							type="text"
@@ -78,7 +78,7 @@ const SendNotes = ({ onNoteAdded }) => {
 							placeholder="Escribe tu nota aquí"
 						/>
 						<button
-							className="cursor-pointer rounded-md bg-cyan-600 p-1 font-semibold text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+							className="cursor-pointer rounded-md bg-cyan-700 p-1 font-semibold text-white disabled:cursor-not-allowed disabled:bg-gray-500"
 							disabled={isUnchanged}
 							aria-label="Guardar"
 						>
