@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
 import { navigate } from 'astro/virtual-modules/transitions-router.js'
+import { useEffect } from 'react'
 
 const AuthCallback = () => {
 	useEffect(() => {
@@ -27,3 +27,4 @@ const AuthCallback = () => {
 }
 
 export { AuthCallback }
+

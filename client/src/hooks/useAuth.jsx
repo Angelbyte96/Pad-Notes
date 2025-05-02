@@ -1,6 +1,6 @@
 // lenguaje: javascript
 import { navigate } from 'astro/virtual-modules/transitions-router.js'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const useAuth = () => {
 	const [isLogin, setIsLogin] = useState(false)

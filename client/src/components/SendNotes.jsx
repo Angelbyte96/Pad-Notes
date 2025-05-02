@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
+import { StickyNote } from 'lucide-react'
 import { useState } from 'react'
 import { ModalRadix } from './ModalRadix'
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
-import { StickyNote } from 'lucide-react'
 
 const SendNotes = ({ onNoteAdded }) => {
 	const [noteTitle, setNoteTitle] = useState('')
 	const [note, setNote] = useState('')
 	const [isOpen, setIsOpen] = useState(false)
 
-	const handleSubmit = async e => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
 
 		const user = JSON.parse(localStorage.getItem('user'))
@@ -21,11 +21,11 @@ const SendNotes = ({ onNoteAdded }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`
+					Authorization: `Bearer ${token}`,
 				},
 				body: JSON.stringify({
-					data: { title: noteTitle, text_note: note, user: user.id }
-				})
+					data: { title: noteTitle, text_note: note, user: user.id },
+				}),
 			})
 
 			if (!response.ok) throw new Error('Error al enviar la nota')
@@ -48,40 +48,40 @@ const SendNotes = ({ onNoteAdded }) => {
 				isOpen={isOpen}
 				onOpenChange={setIsOpen}
 				trigger={
-					<button className='flex items-center self-end gap-2 text-white bg-green-700 p-1 rounded-md cursor-pointer font-semibold'>
+					<button className="flex cursor-pointer items-center gap-2 self-end rounded-md bg-green-700 p-1 font-semibold text-white">
 						Nueva nota{' '}
 						<span>
 							<StickyNote width={18} height={18} />
 						</span>
 					</button>
-				}>
-				<section id='sendNotes' className='flex flex-col items-center w-full gap-4'>
-					<h3 className='text-xl md:text-2xl text-white'>Ingresa alguna nota</h3>
-					<form
-						className='flex flex-col gap-2 w-full justify-center'
-						onSubmit={handleSubmit}>
+				}
+			>
+				<section id="sendNotes" className="flex w-full flex-col items-center gap-4">
+					<h3 className="text-xl text-white md:text-2xl">Ingresa alguna nota</h3>
+					<form className="flex w-full flex-col justify-center gap-2" onSubmit={handleSubmit}>
 						<input
-							type='text'
-							className='p-1 w-full md:w-full bg-white rounded-md text-black'
-							id='title'
-							name='title'
+							type="text"
+							className="w-full rounded-md bg-white p-1 text-black md:w-full"
+							id="title"
+							name="title"
 							value={noteTitle}
-							onChange={e => setNoteTitle(e.target.value)}
-							placeholder='Titulo'
+							onChange={(e) => setNoteTitle(e.target.value)}
+							placeholder="Titulo"
 						/>
 						<textarea
-							type='text'
-							className='p-1 w-full md:w-full bg-white rounded-md text-black break-words whitespace-normal field-sizing-content'
-							id='note'
-							name='note'
+							type="text"
+							className="field-sizing-content w-full rounded-md bg-white p-1 break-words whitespace-normal text-black md:w-full"
+							id="note"
+							name="note"
 							value={note}
-							onChange={e => setNote(e.target.value)}
-							placeholder='Escribe tu nota aquí'
+							onChange={(e) => setNote(e.target.value)}
+							placeholder="Escribe tu nota aquí"
 						/>
 						<button
-							className='bg-cyan-600 p-1 rounded-md font-semibold text-white cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed'
+							className="cursor-pointer rounded-md bg-cyan-600 p-1 font-semibold text-white disabled:cursor-not-allowed disabled:bg-gray-500"
 							disabled={isUnchanged}
-							aria-label='Guardar'>
+							aria-label="Guardar"
+						>
 							Guardar
 						</button>
 					</form>
@@ -92,3 +92,4 @@ const SendNotes = ({ onNoteAdded }) => {
 }
 
 export { SendNotes }
+

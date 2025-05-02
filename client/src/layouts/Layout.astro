@@ -1,20 +1,22 @@
 ---
-import '../styles/global.css'
-import { Toaster } from '@pheralb/toast';
-import { Nav } from '@/components/Nav.jsx'
 import { Footer } from '@/components/Footer.jsx'
+import { Nav } from '@/components/Nav.jsx'
+import { Toaster } from '@pheralb/toast'
+import '../styles/global.css'
 ---
 
 <!doctype html>
-<html lang='es'>
+<html lang="es">
 	<head>
-		<meta charset='UTF-8' />
-		<meta name='viewport' content='width=device-width' />
-		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-		<meta name='generator' content={Astro.generator} />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
 		<title>App Notas</title>
 	</head>
-	<body class='bg-home h-[100vh] min-h-screen grid place-items-start md:place-items-center grid-rows-[auto_1fr_auto] gap-2'>
+	<body
+		class="bg-home grid h-[100vh] min-h-screen grid-rows-[auto_1fr_auto] place-items-start gap-2 md:place-items-center"
+	>
 		<Nav />
 		<slot />
 		<Footer />

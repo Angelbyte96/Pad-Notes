@@ -1,42 +1,40 @@
 // lenguaje: javascript
-import { useAuth } from '../hooks/useAuth'
-import { SendNotes } from './SendNotes'
 import { useChangeNotes } from '@/hooks/useChangeNotes'
-import { ListNotes } from './ListNotes'
 import { navigate } from 'astro/virtual-modules/transitions-router.js'
 import { useEffect } from 'react'
+import { useAuth } from '../hooks/useAuth'
+import { ListNotes } from './ListNotes'
 
 const Dashboard = () => {
-  const { isLogin, handleLogout, userName, isLoading } = useAuth()
-  const { refreshNotes, handleNoteAdded } = useChangeNotes()
+	const { isLogin, handleLogout, userName, isLoading } = useAuth()
+	const { refreshNotes, handleNoteAdded } = useChangeNotes()
 
-  // Si no está logueado, redirige a la página principal
-  useEffect(() => {
-    if (!isLoading && !isLogin) {
-      navigate('/')
-    }
-  }, [isLoading, isLogin])
+	// Si no está logueado, redirige a la página principal
+	useEffect(() => {
+		if (!isLoading && !isLogin) {
+			navigate('/')
+		}
+	}, [isLoading, isLogin])
 
-  if (isLoading) return <p className='text-center'>Cargando...</p>
+	if (isLoading) return <p className="text-center">Cargando...</p>
 
-  return (
-    <section className='flex flex-col items-center gap-4 w-full'>
-      <h2 className='text-xl md:text-3xl text-black'>
-        Bienvenido a tu inicio{' '}
-        <span className='text-[#0d7395] font-semibold uppercase'>{userName}</span>
-      </h2>
+	return (
+		<section className="flex w-full flex-col items-center gap-4">
+			<h2 className="text-xl text-black md:text-3xl">
+				Bienvenido a tu inicio{' '}
+				<span className="font-semibold text-[#0d7395] uppercase">{userName}</span>
+			</h2>
 
-      {/* Sección para ingresar notas */}
-      <section className='flex flex-col items-center gap-4 w-11/12 md:w-10/12 bg-opacity-80 bg-slate-800 p-4 rounded-lg'>
-        <ListNotes refreshTrigger={refreshNotes} onNoteAdded={handleNoteAdded} />
-      </section>
-      <button
-        className='bg-red-500 p-1 text-white rounded-lg'
-        onClick={handleLogout}>
-        Cerrar sesión
-      </button>
-    </section>
-  )
+			{/* Sección para ingresar notas */}
+			<section className="bg-opacity-80 flex w-11/12 flex-col items-center gap-4 rounded-lg bg-slate-800 p-4 md:w-10/12">
+				<ListNotes refreshTrigger={refreshNotes} onNoteAdded={handleNoteAdded} />
+			</section>
+			<button className="rounded-lg bg-red-500 p-1 text-white" onClick={handleLogout}>
+				Cerrar sesión
+			</button>
+		</section>
+	)
 }
 
 export { Dashboard }
+

@@ -2,13 +2,13 @@ import { Heart } from 'lucide-react'
 
 const Footer = () => {
 	return (
-		<footer className='flex items-center justify-center mx-auto w-full pb-1 border-t py-2 md:py-4 px-4 font-semibold'>
-			<p className='w-full flex justify-start gap-1'>
+		<footer className="mx-auto flex w-full items-center justify-center border-t px-4 py-2 pb-1 font-semibold md:py-4">
+			<p className="flex w-full justify-start gap-1">
 				Hecho con{' '}
 				<span>
-					<Heart size='20' className='text-red-700 animate-pulse select-none' />
+					<Heart size="20" className="animate-pulse text-red-700 select-none" />
 				</span>{' '}
-				<span className='overflow-hidden m-[-1px] h-[1px] w-[1px] whitespace-nowrap p-0 border-0 absolute'>
+				<span className="absolute m-[-1px] h-[1px] w-[1px] overflow-hidden border-0 p-0 whitespace-nowrap">
 					amor
 				</span>
 				por Angelbyte
@@ -18,3 +18,4 @@ const Footer = () => {
 }
 
 export { Footer }
+

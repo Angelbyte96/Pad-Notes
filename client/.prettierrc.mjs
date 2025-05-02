@@ -6,6 +6,8 @@ export default {
 	tabWidth: 2,
 	// Punto y coma al final de cada línea
 	semi: false,
+	// Comillas simples en lugar de dobles
+	singleQuote: true,
 	plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
 	overrides: [
 		{
@@ -15,4 +17,4 @@ export default {
 			},
 		},
 	],
-};
+}
