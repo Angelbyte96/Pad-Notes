@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
+import { useNotesActions } from '@/hooks/useNotesActions'
 import { useCallback, useEffect, useState } from 'react'
 import { NoteArticle } from './NoteArticle'
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
-import { useNotesActions } from '@/hooks/useNotesActions'
 
 const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const [notes, setNotes] = useState([])
@@ -18,18 +18,17 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const token = user ? user.token : null
 	const userId = user ? user.id : null
 
-	const { handleDeleteNote, handleEditNote, handleCancelEdit, handleUpdate } =
-		useNotesActions({
-			STRAPI_URL,
-			token,
-			onNoteAdded,
-			setEditingNoteId,
-			setNoteTitle,
-			setNoteMessage,
-			editingNoteId,
-			noteTitle,
-			noteMessage
-		})
+	const { handleDeleteNote, handleEditNote, handleCancelEdit, handleUpdate } = useNotesActions({
+		STRAPI_URL,
+		token,
+		onNoteAdded,
+		setEditingNoteId,
+		setNoteTitle,
+		setNoteMessage,
+		editingNoteId,
+		noteTitle,
+		noteMessage,
+	})
 
 	const fetchNotes = useCallback(async () => {
 		try {
@@ -38,9 +37,9 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 				`${STRAPI_URL}/api/note?populate=user&filters[user][documentId]=${userId}&sort=updatedAt:desc`,
 				{
 					headers: {
-						Authorization: `Bearer ${token}`
-					}
-				}
+						Authorization: `Bearer ${token}`,
+					},
+				},
 			)
 			const response = await fetchApi.json()
 			setNotes(response.data)
@@ -86,3 +85,4 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 }
 
 export { ListNotes }
+

@@ -1,6 +1,6 @@
 // AuthRedirect.jsx
-import { useEffect } from 'react'
 import { navigate } from 'astro/virtual-modules/transitions-router.js'
+import { useEffect } from 'react'
 
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
@@ -14,16 +14,16 @@ const AuthRedirect = ({ provider }) => {
 			const callbackUrl = `${STRAPI_URL}/api/auth/${provider}/callback?access_token=${accessToken}`
 
 			fetch(callbackUrl)
-				.then(res => res.json())
-				.then(data => {
+				.then((res) => res.json())
+				.then((data) => {
 					if (data.jwt && data.user) {
 						localStorage.setItem(
 							'user',
 							JSON.stringify({
 								token: data.jwt,
 								username: data.user.username,
-								id: data.user.documentId // campo usado para identificar al usuario en Strapi
-							})
+								id: data.user.documentId, // campo usado para identificar al usuario en Strapi
+							}),
 						)
 						navigate('/dashboard')
 					} else {
@@ -31,7 +31,7 @@ const AuthRedirect = ({ provider }) => {
 						navigate('/')
 					}
 				})
-				.catch(error => {
+				.catch((error) => {
 					console.error('Error al validar el access_token:', error)
 					navigate('/')
 				})
@@ -49,3 +49,4 @@ const AuthRedirect = ({ provider }) => {
 }
 
 export { AuthRedirect }
+

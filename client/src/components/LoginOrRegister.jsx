@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { FormRegister } from './FormRegister'
 import { FormLogin } from './FormLogin'
+import { FormRegister } from './FormRegister'
 
 const LoginOrRegister = () => {
 	const [showRegister, setShowRegister] = useState(false)
@@ -22,16 +22,20 @@ const LoginOrRegister = () => {
 	}
 
 	return (
-		<section className='w-fit flex flex-col items-center gap-4 text-white px-2 py-4'>
+		<section className="flex w-fit flex-col items-center gap-4 px-2 py-4 text-white">
 			{!showLogin && !showRegister && (
-				<div className='flex flex-col items-center gap-4'>
+				<div className="flex flex-col items-center gap-4">
 					<button
-						className='bg-blue-500 p-2 rounded-lg text-2xl font-semibold'
-						onClick={handleShowRegister}>
+						className="rounded-lg bg-blue-500 p-2 text-2xl font-semibold"
+						onClick={handleShowRegister}
+					>
 						Registrate
 					</button>
-					<span className='text-black'>O</span>
-					<button className='bg-blue-600 p-2 rounded-lg text-2xl font-semibold' onClick={handleShowLogin}>
+					<span className="text-black">O</span>
+					<button
+						className="rounded-lg bg-blue-600 p-2 text-2xl font-semibold"
+						onClick={handleShowLogin}
+					>
 						Inicia sesión
 					</button>
 				</div>
@@ -40,8 +44,9 @@ const LoginOrRegister = () => {
 				<>
 					<FormRegister />
 					<button
-						className='bg-teal-700 p-1 text-white rounded-lg font-semibold border-solid border-teal-800 border-[2px]'
-						onClick={handleBack}>
+						className="rounded-lg border-[2px] border-solid border-teal-800 bg-teal-700 p-1 font-semibold text-white"
+						onClick={handleBack}
+					>
 						⬅️Atrás
 					</button>
 				</>
@@ -50,8 +55,9 @@ const LoginOrRegister = () => {
 				<>
 					<FormLogin />
 					<button
-						className='bg-teal-700 p-1 text-white rounded-lg font-semibold border-solid border-teal-800 border-[2px]'
-						onClick={handleBack}>
+						className="rounded-lg border-[2px] border-solid border-teal-800 bg-teal-700 p-1 font-semibold text-white"
+						onClick={handleBack}
+					>
 						⬅️Atrás
 					</button>
 				</>
@@ -61,3 +67,4 @@ const LoginOrRegister = () => {
 }
 
 export { LoginOrRegister }
+

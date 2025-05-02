@@ -1,5 +1,5 @@
-import { Copy } from 'lucide-react'
 import { toast } from '@pheralb/toast'
+import { Copy } from 'lucide-react'
 
 const ButtonCopy = ({ note }) => {
 	const handleCopyNote = (e) => {
@@ -7,20 +7,19 @@ const ButtonCopy = ({ note }) => {
 
 		navigator.clipboard.writeText(note)
 		toast.default({
-			text: 'Nota copiada al portapapeles ✨'
+			text: 'Nota copiada al portapapeles ✨',
 		})
 	}
 
 	return (
 		<button
-			className='bg-gray-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-30'
-			onClick={handleCopyNote}>
-			<Copy
-				size={20}
-				className='text-white p-0.5 hover:transform hover:animate-pulse'
-			/>
+			className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-gray-700 px-2.5 py-[0.1rem] text-sm font-semibold transition hover:scale-105 focus:ring-1 focus:ring-white focus:outline-none"
+			onClick={handleCopyNote}
+		>
+			<Copy size={20} className="p-0.5 text-white hover:transform hover:animate-pulse" />
 		</button>
 	)
 }
 
 export { ButtonCopy }
+

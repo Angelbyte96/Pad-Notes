@@ -1,11 +1,12 @@
 import '@/styles/global.css'
 
 const Nav = () => {
-    return (
-        <nav className="flex items-center justify-center w-full bg-[#17142341] shadow-lg p-1">
-            <h1 className='text-2xl md:text-4xl text-white py-2 uppercase'>pad notes</h1>
-        </nav>
-    )
+	return (
+		<nav className="flex w-full items-center justify-center bg-[#17142341] p-1 shadow-lg">
+			<h1 className="py-2 text-2xl text-white uppercase md:text-4xl">pad notes</h1>
+		</nav>
+	)
 }
 
 export { Nav }
+

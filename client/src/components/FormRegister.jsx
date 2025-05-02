@@ -10,7 +10,7 @@ const FormRegister = () => {
 	const [isError, setIsError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 
-	const handleSubmit = async e => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
 
 		setMessage(null)
@@ -27,21 +27,18 @@ const FormRegister = () => {
 		}
 		setIsLoading(true)
 		try {
-			const response = await fetch(
-				`${STRAPI_URL}/api/auth/local/register`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${STRAPI_TOKEN}`
-					},
-					body: JSON.stringify({
-						username: username,
-						email: email,
-						password: password
-					})
-				}
-			)
+			const response = await fetch(`${STRAPI_URL}/api/auth/local/register`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${STRAPI_TOKEN}`,
+				},
+				body: JSON.stringify({
+					username: username,
+					email: email,
+					password: password,
+				}),
+			})
 
 			if (!response.ok) {
 				if (response.status === 400) {
@@ -61,8 +58,8 @@ const FormRegister = () => {
 					JSON.stringify({
 						token: data.jwt,
 						username: data.user.username,
-						id: data.user.documentId
-					})
+						id: data.user.documentId,
+					}),
 				)
 
 			resetForm()
@@ -77,49 +74,50 @@ const FormRegister = () => {
 		}
 	}
 	return (
-		<section className='flex flex-col items-center gap-4 text-white bg-slate-800 px-2 py-4 rounded-md w-80'>
-			<h1 className='text-4xl uppercase'>Registro</h1>
+		<section className="flex w-80 flex-col items-center gap-4 rounded-md bg-slate-800 px-2 py-4 text-white">
+			<h1 className="text-4xl uppercase">Registro</h1>
 			<form
 				onSubmit={handleSubmit}
-				className='flex flex-col justify-center items-center gap-4 text-white w-10/12'>
-				<label htmlFor='username' className='flex flex-col w-full items-center'>
-					<span className='self-start'>Nombre de usuario:</span>
+				className="flex w-10/12 flex-col items-center justify-center gap-4 text-white"
+			>
+				<label htmlFor="username" className="flex w-full flex-col items-center">
+					<span className="self-start">Nombre de usuario:</span>
 					<input
-						type='text'
-						id='username'
-						name='username'
+						type="text"
+						id="username"
+						name="username"
 						value={username}
-						onChange={e => setUsername(e.target.value)}
-						className='bg-gray-200 p-1 rounded-md w-full text-black'
-						placeholder='Ingresa tu username'
+						onChange={(e) => setUsername(e.target.value)}
+						className="w-full rounded-md bg-gray-200 p-1 text-black"
+						placeholder="Ingresa tu username"
 					/>
 				</label>
-				<label htmlFor='email' className='flex flex-col w-full items-center'>
-					<span className='self-start'>Email:</span>
+				<label htmlFor="email" className="flex w-full flex-col items-center">
+					<span className="self-start">Email:</span>
 					<input
-						type='email'
-						id='email'
-						name='email'
+						type="email"
+						id="email"
+						name="email"
 						value={email}
-						onChange={e => setEmail(e.target.value)}
-						className='bg-gray-200 p-1 rounded-md w-full text-black'
-						placeholder='Ingresa tu email'
+						onChange={(e) => setEmail(e.target.value)}
+						className="w-full rounded-md bg-gray-200 p-1 text-black"
+						placeholder="Ingresa tu email"
 					/>
 				</label>
-				<label htmlFor='password' className='flex flex-col w-full items-center'>
-					<span className='self-start'>Contraseña:</span>
+				<label htmlFor="password" className="flex w-full flex-col items-center">
+					<span className="self-start">Contraseña:</span>
 					<input
-						type='password'
-						id='password'
-						name='password'
+						type="password"
+						id="password"
+						name="password"
 						value={password}
-						onChange={e => setPassword(e.target.value)}
-						className='bg-gray-200 p-1 rounded-md w-full text-black'
-						placeholder='Ingresa tu contraseña'
+						onChange={(e) => setPassword(e.target.value)}
+						className="w-full rounded-md bg-gray-200 p-1 text-black"
+						placeholder="Ingresa tu contraseña"
 					/>
 				</label>
 				{message && <p style={{ color: isError ? 'red' : 'green' }}>{message}</p>}
-				<button className='bg-blue-500 w-fit py-1 px-2 text-lg rounded-md'>
+				<button className="w-fit rounded-md bg-blue-500 px-2 py-1 text-lg">
 					{isLoading ? 'Registrando...' : 'Registrar'}
 				</button>
 			</form>
@@ -128,3 +126,4 @@ const FormRegister = () => {
 }
 
 export { FormRegister }
+
