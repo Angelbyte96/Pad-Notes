@@ -76,10 +76,18 @@ Una aplicación web para crear y gestionar notas personales, con autenticación 
    ```
 5. **Crear archivo `.env` en client con**:
    ```env
-   VITE_AUTH0_DOMAIN=dominioDeAuth0
-   VITE_AUTH0_CLIENT_ID=opcionalSiSeUsaAuth0
-   VITE_STRAPI_HOST=tuHostDeStrapi -> http://localhost:1337
-   VITE_STRAPI_TOKEN=toTokenDeStrapi
+   PUBLIC_STRAPI_HOST=tuHostDeStrapi -> http://localhost:1337
+   PUBLIC_STRAPI_TOKEN=toTokenDeStrapi
+
+6. **Ajustar el provider de Google o adicionales**
+
+- Client ID: ForGoogleConsole
+- Client Secret: ForGoogleConsole
+- The redirect URL to your front-end app: http://localhost:4321/connect/google/redirect
+   - En Google console se ajusta en "URIs de redireccionamiento autorizados", agregalo y además agrega el sitio real, para ello sustituye el localhost por la ruta de tu backend.
+- The redirect URL to add in your google application configurations: ForStrapi: Default -> http://localhost:1337/api/connect/google/callback
+
+- En Google console, la sección de Orígenes autorizados de JavaScript, agrega el localhost de tu frontend y el url real de tu web.
    
 7. **Levantar los servidores**:
 
