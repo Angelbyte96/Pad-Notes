@@ -13,13 +13,24 @@ import '../styles/global.css'
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>App Notas</title>
+		<script is:inline>
+			const storedTheme = localStorage.getItem('theme')
+			const defaultTheme = 'dark'
+			const initialTheme = storedTheme || defaultTheme
+			if (initialTheme === 'dark') {
+				document.documentElement.classList.add('dark')
+			} else {
+				document.documentElement.classList.remove('dark')
+			}
+			localStorage.setItem('theme', initialTheme)
+		</script>
 	</head>
 	<body
 		class="bg-home grid h-[100vh] min-h-screen grid-rows-[auto_1fr_auto] place-items-start gap-2 md:place-items-center"
 	>
-		<Nav />
+		<Nav client:load/>
 		<slot />
 		<Footer />
-		<Toaster client:load />
+		<Toaster theme='light' client:load />
 	</body>
 </html>

@@ -20,9 +20,9 @@ const Dashboard = () => {
 
 	return (
 		<section className="flex w-full flex-col items-center gap-4">
-			<h2 className="text-xl text-black md:text-3xl">
+			<h2 className="text-xl text-black dark:text-white md:text-3xl">
 				Bienvenido a tu inicio{' '}
-				<span className="font-semibold text-[#0d7395] uppercase">{userName}</span>
+				<span className="font-semibold text-[#0d7395] dark:text-cyan-500 uppercase">{userName}</span>
 			</h2>
 
 			{/* Sección para ingresar notas */}
