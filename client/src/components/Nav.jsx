@@ -3,9 +3,11 @@ import '@/styles/global.css'
 
 const Nav = () => {
 	return (
-		<nav className="flex w-full items-center justify-between bg-[#17142341] p-0.5 shadow-lg">
-			<div className="w-28"></div> 
-			<h1 className="py-1 text-2xl text-black dark:text-white uppercase md:text-4xl font-semibold justify-self-center">pad notes</h1>
+		<nav className="flex sticky top-0 z-50 w-full items-center justify-between bg-[#ffffff] dark:bg-neutral-900 p-0.5 px-4 shadow-lg">
+			<div className="w-6"></div>
+			<h1 className="justify-self-center py-1 text-xl font-semibold text-black uppercase md:text-4xl dark:text-white">
+				pad notes
+			</h1>
 			<ThemeToggle />
 		</nav>
 	)

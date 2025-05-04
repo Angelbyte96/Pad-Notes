@@ -19,10 +19,10 @@ function App() {
 	return (
 		<main className="mt-10 mb-2 flex w-full flex-col items-center justify-center gap-4 md:mt-0">
 			<div className="flex w-9/12 flex-col items-center gap-4">
-				<h1 className="text-center text-3xl font-semibold text-black md:text-6xl">
+				<h1 className="text-center text-3xl font-semibold text-black md:text-6xl dark:text-white">
 					Organiza tus ideas de forma simple y rápida
 				</h1>
-				<p className="w-11/12 text-center text-base font-medium text-black md:w-8/12 md:text-lg">
+				<p className="w-11/12 text-center text-base font-medium text-black dark:text-white md:w-8/12 md:text-lg">
 					Un sitio <span style={highlightStyle}>simple</span> y{' '}
 					<span style={highlightStyle}>minimalista</span>, diseñado para que puedas
 					<span style={highlightStyle}> guardar</span> información,{' '}

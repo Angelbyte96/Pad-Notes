@@ -48,7 +48,7 @@ const SendNotes = ({ onNoteAdded }) => {
 				isOpen={isOpen}
 				onOpenChange={setIsOpen}
 				trigger={
-					<button className="flex cursor-pointer items-center gap-2 self-end rounded-md bg-green-700 px-2 py-1 font-semibold text-white hover:bg-green-800">
+					<button className="flex cursor-pointer text-sm md:text-base items-center gap-2 self-end rounded-md bg-green-700 px-2 py-1 font-semibold text-white hover:bg-green-800">
 						Nueva nota{' '}
 						<span>
 							<StickyNote width={18} height={18} />

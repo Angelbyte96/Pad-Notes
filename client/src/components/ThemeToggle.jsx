@@ -1,38 +1,55 @@
 // src/components/ThemeToggle.jsx (componente React)
-import { useEffect, useState } from 'react';
+import { Moon, Sun } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 function ThemeToggle() {
-  // Estado interno opcional para icono/UI, basado en la clase actual
-  const [isDark, setIsDark] = useState(() => 
-    typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
-  );
+    // Estado para controlar si estamos en el cliente
+    const [mounted, setMounted] = useState(false)
+    // Estado para el tema (inicializa con null para evitar renderizado prematuro)
+    const [isDark, setIsDark] = useState(null)
 
-  useEffect(() => {
-    // Sincronizar estado local con la preferencia almacenada (por si acaso)
-    const stored = localStorage.getItem('theme');
-    if (stored) setIsDark(stored === 'dark');
-  }, []);
+    // Efecto que se ejecuta solo en el cliente después de la hidratación
+    useEffect(() => {
+        // Detectar el tema actual basado en la clase
+        const isDarkMode = document.documentElement.classList.contains('dark')
+        setIsDark(isDarkMode)
+        setMounted(true)
+    }, [])
 
-  const toggleTheme = () => {
-    const htmlEl = document.documentElement;
-    const currentlyDark = htmlEl.classList.contains('dark');
-    if (currentlyDark) {
-      htmlEl.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      setIsDark(false);
-    } else {
-      htmlEl.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      setIsDark(true);
+    const toggleTheme = () => {
+        const newIsDark = !isDark
+        if (newIsDark) {
+            document.documentElement.classList.add('dark')
+            localStorage.setItem('theme', 'dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+            localStorage.setItem('theme', 'light')
+        }
+        setIsDark(newIsDark)
     }
-  };
 
-  return (
-    <button className='text-black dark:text-white justify-self-end' onClick={toggleTheme} aria-label="Alternar tema">
-      {isDark ? '🌞 Modo Claro' : '🌜 Modo Oscuro'}
-    </button>
-  );
+    // Si no estamos montados o el estado del tema aún no se ha determinado
+    if (!mounted) {
+        return (
+            <button
+                className="justify-self-end text-black dark:text-white"
+                aria-label="Alternar tema"
+            >
+                <div className="w-5 h-5"></div>
+            </button>
+        )
+    }
+
+    return (
+        <button
+            className="justify-self-end text-black dark:text-white hover:cursor-pointer"
+            onClick={toggleTheme}
+            aria-label="Alternar tema"
+        >
+            {isDark ? <Sun /> : <Moon />}
+        </button>
+    )
 }
 
-export { ThemeToggle };
+export { ThemeToggle }
 

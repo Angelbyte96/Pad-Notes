@@ -28,9 +28,9 @@ import '../styles/global.css'
 	<body
 		class="bg-home grid h-[100vh] min-h-screen grid-rows-[auto_1fr_auto] place-items-start gap-2 md:place-items-center"
 	>
-		<Nav client:idle/>
+		<Nav client:load/>
 		<slot />
 		<Footer />
-		<Toaster client:load />
+		<Toaster theme='light' client:load />
 	</body>
 </html>
