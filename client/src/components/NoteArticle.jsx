@@ -65,7 +65,8 @@ const NoteArticle = ({
 													{note.title}
 												</h2>
 												<p className="mb-2.5 w-full self-start overflow-hidden text-sm text-ellipsis whitespace-nowrap text-black md:text-lg dark:text-white">
-													{note.text_note}
+													{note.text_note.split('\n')[0]}
+													{note.text_note.includes('\n') ? '...' : ''}
 												</p>
 												<div className="self-end text-xs text-[#808692] md:text-sm">
 													<span>Editado: </span>
@@ -81,12 +82,14 @@ const NoteArticle = ({
 												<>
 													<section className="flex w-full flex-col gap-2">
 														<label htmlFor="noteTitle" className="flex w-fit gap-1">
-															<span className="font-semibold text-slate-800 dark:text-white">Titulo</span>
+															<span className="font-semibold text-slate-800 dark:text-white">
+																Titulo
+															</span>
 														</label>
 														<input
 															type="text"
 															value={noteTitle}
-															className="field-sizing-content w-full resize-none rounded-lg border-1 border-[#e5e7eb] px-2 py-1 text-black dark:text-white text-start break-all whitespace-normal uppercase focus:border-transparent focus:ring-2 focus:ring-slate-700 dark:focus:ring-slate-400 focus:outline-none"
+															className="field-sizing-content w-full resize-none rounded-lg border-1 border-[#e5e7eb] px-2 py-1 text-start break-all whitespace-normal text-black uppercase focus:border-transparent focus:ring-2 focus:ring-slate-700 focus:outline-none dark:text-white dark:focus:ring-slate-400"
 															onChange={(e) => setNoteTitle(e.target.value)}
 															name="noteTitle"
 															id="noteTitle"
@@ -94,13 +97,15 @@ const NoteArticle = ({
 													</section>
 													<section className="flex w-full flex-col gap-2">
 														<label htmlFor="noteDescrip" className="flex w-fit gap-1">
-															<span className="font-semibold text-slate-800 dark:text-white">Descripción</span>
+															<span className="font-semibold text-slate-800 dark:text-white">
+																Descripción
+															</span>
 														</label>
 														<textarea
 															name="noteDescrip"
 															id="noteDescrip"
 															value={noteMessage}
-															className="field-sizing-content text-black dark:text-white min-h-10 w-full resize-none rounded-lg border-1 border-[#ccc] px-2 py-1 text-start break-words whitespace-normal focus:border-transparent focus:ring-2 focus:ring-slate-700 dark:focus:ring-slate-400 focus:outline-none"
+															className="field-sizing-content min-h-10 w-full resize-none rounded-lg border-1 border-[#ccc] px-2 py-1 text-start break-words whitespace-normal text-black focus:border-transparent focus:ring-2 focus:ring-slate-700 focus:outline-none dark:text-white dark:focus:ring-slate-400"
 															onChange={(e) => setNoteMessage(e.target.value)}
 														></textarea>
 													</section>
@@ -135,7 +140,7 @@ const NoteArticle = ({
 													<h2 className="self-start text-xl font-bold text-black uppercase dark:text-white">
 														{note.title}
 													</h2>
-													<p className="my-4 self-start text-start break-words whitespace-normal text-black dark:text-white">
+													<p className="my-4 self-start text-start break-words whitespace-pre-line text-black dark:text-white">
 														{note.text_note}
 													</p>
 													<div className="flex w-full justify-between gap-2 border-t-1 border-[#e5e7eb] py-2">
