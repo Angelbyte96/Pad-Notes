@@ -1,5 +1,6 @@
 import { ModalRadix } from '@/components/ModalRadix'
 import { SendNotes } from '@/components/SendNotes'
+import { FilterSearch } from '@/components/filterSearch'
 import { format } from '@formkit/tempo'
 import { Check, SquarePen, Trash2, X } from 'lucide-react'
 import { useState } from 'react'
@@ -26,7 +27,9 @@ const NoteArticle = ({
 			<h1 className="text-center text-2xl font-semibold text-black md:text-4xl dark:text-white">
 				Tus notas
 			</h1>
+			{/* Componente para enviar notas */}
 			<SendNotes onNoteAdded={onNoteAdded} />
+			{/* Sección para mostrar el mensaje de error o la carga de notas */}
 			{error ? (
 				<>
 					<p className="text-lg text-red-500">{error.message}</p>
@@ -38,7 +41,8 @@ const NoteArticle = ({
 					<div className="h-8 w-8 animate-spin rounded-full border-b-2 border-white"></div>
 				</div>
 			) : notes?.length === 0 ? (
-				<div className="flex w-full flex-col items-center gap-4">
+				/* Si no hay notas, mostramos un mensaje y una imagen */
+				<div className="flex w-full flex-col items-center gap-4 border-1 border-amber-500">
 					<p className="text-base text-white md:text-lg">No hay notas para mostrar</p>
 					<img
 						src="/image_sad.webp"
@@ -47,7 +51,9 @@ const NoteArticle = ({
 					/>
 				</div>
 			) : (
-				<section className="flex w-full flex-col">
+				// Si hay notas, las mostramos en una grid
+				<section className="flex w-full h-full flex-col gap-4">
+					<FilterSearch />
 					<ul className="grid w-full grid-cols-[repeat(auto-fit,_minmax(250px,1fr))] items-stretch gap-4 text-black">
 						{notes.map((note) => {
 							const isUnchanged = noteTitle === note.title && noteMessage === note.text_note
