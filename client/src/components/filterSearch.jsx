@@ -1,8 +1,8 @@
+import { Search } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
-const FilterSearch = () => {
+const FilterSearch = ({ searchText, setSearchText }) => {
 	const [barIsVisible, setBarIsVisible] = useState(false)
-	const [searchText, setSearchText] = useState('')
 	const inputRef = useRef(null)
 
 	useEffect(() => {
@@ -23,12 +23,12 @@ const FilterSearch = () => {
 
 	return (
 		<article
-			className={`flex w-full items-center justify-start overflow-hidden border-1 border-white py-1 transition-all duration-300 ease-in-out`}
+			className={`flex w-full items-center justify-start overflow-hidden py-1 transition-all duration-300 ease-in-out`}
 		>
 			<input
 				ref={inputRef}
 				type="text"
-				className={`rounded-md bg-white py-1 pl-1 ${barIsVisible ? 'w-10/12 opacity-100' : 'w-0 opacity-0'} transition-all duration-300 ease-in-out`}
+				className={`rounded-md bg-white py-1 pl-1 ${barIsVisible ? 'w-full opacity-100' : 'w-0 opacity-0'} transition-all duration-300 ease-in-out`}
 				placeholder="Texto a buscar"
 				disabled={!barIsVisible}
 				onKeyDown={handleKeyDown}
@@ -38,9 +38,9 @@ const FilterSearch = () => {
 			/>
 			<button
 				onClick={handleClick}
-				className={`rounded-md bg-cyan-600 px-1 py-0.5 text-black dark:text-white ${barIsVisible ? 'pointer-events-none absolute opacity-0' : 'opacity-100'} transition-all duration-300 ease-in-out`}
+				className={`rounded-md bg-cyan-600 px-1 py-0.5 text-black dark:text-white ${barIsVisible ? 'pointer-events-none absolute opacity-0' : 'cursor-pointer opacity-100'} transition-all duration-300 ease-in-out`}
 			>
-				Buscar
+				<Search />
 			</button>
 		</article>
 	)
