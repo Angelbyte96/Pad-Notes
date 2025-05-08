@@ -40,7 +40,7 @@ const FilterSearch = ({ searchText, setSearchText }) => {
 				onClick={handleClick}
 				className={`rounded-md bg-cyan-600 px-1 py-0.5 text-black dark:text-white ${barIsVisible ? 'pointer-events-none absolute opacity-0' : 'cursor-pointer opacity-100'} transition-all duration-300 ease-in-out`}
 			>
-				<Search />
+				<Search className='text-white'/>
 			</button>
 		</article>
 	)
