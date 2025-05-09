@@ -29,7 +29,7 @@ const FilterSearch = ({ searchText, setSearchText }) => {
 				ref={inputRef}
 				type="text"
 				className={`rounded-md bg-white py-1 pl-1 ${barIsVisible ? 'w-full opacity-100' : 'w-0 opacity-0'} transition-all duration-300 ease-in-out`}
-				placeholder="Texto a buscar"
+				placeholder="Nota a buscar"
 				disabled={!barIsVisible}
 				onKeyDown={handleKeyDown}
 				onBlur={() => setBarIsVisible(false)}
