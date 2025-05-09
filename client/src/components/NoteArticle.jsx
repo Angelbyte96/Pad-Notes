@@ -23,6 +23,32 @@ const NoteArticle = ({
 }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [searchTerm, setSearchTerm] = useState('')
+
+	// Función para resaltar coincidencias en el texto
+	function highLightMatch(text, searchTerm) {
+		// Si no existe el termino a buscar o este es una cadena vacía, retornamos el texto sin cambios
+		if (!searchTerm || searchTerm === '') return text
+
+		// Creamos una expresión regular para buscar el término de búsqueda en el texto
+		const escapedSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+		// Usamos la expresión regular para encontrar coincidencias y resaltarlas
+		// La bandera 'g' permite buscar todas las coincidencias y 'i' hace la búsqueda sin importar mayúsculas o minúsculas
+		const regex = new RegExp(`(${escapedSearchTerm})`, 'gi')
+
+		// Dividir el texto por coincidencias y mapear los resultados
+		return text.split(regex).map((part, i) => {
+			if (part.toLowerCase() === searchTerm.toLowerCase()) {
+				return (
+					<mark key={i} className="rounded bg-yellow-200 px-0.5 dark:bg-yellow-700 dark:text-white">
+						{part}
+					</mark>
+				)
+			}
+			return part
+		})
+	}
+
 	return (
 		<div className="bg-opacity-80 flex w-10/12 flex-col items-center gap-4 rounded-lg border-[1px] border-gray-300 bg-slate-50 p-4 shadow-md shadow-black/30 backdrop-blur-sm dark:bg-[#202020]">
 			<h1 className="text-center text-2xl font-semibold text-black md:text-4xl dark:text-white">
@@ -106,10 +132,10 @@ const NoteArticle = ({
 													trigger={
 														<div className="group relative flex h-full w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-[1px] border-[#e5e5e5] bg-white px-4 py-2 shadow-md shadow-black/30 backdrop-blur-sm hover:bg-slate-50 hover:shadow-black/50 dark:bg-[#2c2c2c] dark:shadow-white/30 dark:hover:bg-[#1f1f1f]">
 															<h2 className="self-start font-bold text-black uppercase md:text-xl dark:text-white">
-																{note.title}
+																{highLightMatch(note.title, searchTerm)}
 															</h2>
 															<p className="mb-2.5 w-full self-start overflow-hidden text-sm text-ellipsis whitespace-nowrap text-black md:text-lg dark:text-white">
-																{note.text_note.split('\n')[0]}
+																{highLightMatch(note.text_note.split('\n')[0], searchTerm)}
 																{note.text_note.includes('\n') ? '...' : ''}
 															</p>
 															<div className="self-end text-xs text-[#808692] md:text-sm">
@@ -182,10 +208,10 @@ const NoteArticle = ({
 																	<span>{dateCreated}</span>
 																</div>
 																<h2 className="self-start text-xl font-bold text-black uppercase dark:text-white">
-																	{note.title}
+																	{highLightMatch(note.title, searchTerm)}
 																</h2>
 																<p className="my-4 self-start text-start break-words whitespace-pre-line text-black dark:text-white">
-																	{note.text_note}
+																	{highLightMatch(note.text_note, searchTerm)}
 																</p>
 																<div className="flex w-full justify-between gap-2 border-t-1 border-[#e5e7eb] py-2">
 																	{/* <button
