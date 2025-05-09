@@ -2,7 +2,7 @@ import { ModalRadix } from '@/components/ModalRadix'
 import { SendNotes } from '@/components/SendNotes'
 import { FilterSearch } from '@/components/filterSearch'
 import { format } from '@formkit/tempo'
-import { Check, SquarePen, Trash2, X } from 'lucide-react'
+import { Check, Eraser, SquarePen, Trash2, X } from 'lucide-react'
 import { useState } from 'react'
 import { ButtonCopy } from './ButtonCopy'
 
@@ -76,9 +76,20 @@ const NoteArticle = ({
 						return (
 							<>
 								{searchTerm && (
-									<div className="self-end text-black dark:text-white md:text-lg bg-[#e5e7eb] dark:bg-[#2c2c2c] px-4 py-2 rounded-lg">
-										{filteredNotes.length}
-										{filteredNotes.length === 1 ? ' nota encontrada' : ' notas encontradas'}
+									<div className="flex justify-end gap-2 md:gap-4">
+										<button
+											className="cursor-pointer rounded-lg border border-gray-300 bg-transparent px-2 py-1 transition-all duration-200 hover:border-gray-400 dark:border-gray-600 dark:hover:border-gray-500"
+											aria-label="Limpiar búsqueda"
+											onClick={() => setSearchTerm('')}
+										>
+											<Eraser className="w-6 text-black dark:text-white" />
+										</button>
+										<div className="flex gap-2 self-end rounded-lg bg-[#e5e7eb] px-4 py-2 text-black md:text-lg dark:bg-[#2c2c2c] dark:text-white">
+											<span>
+												{filteredNotes.length}
+												{filteredNotes.length === 1 ? ' nota encontrada' : ' notas encontradas'}
+											</span>
+										</div>
 									</div>
 								)}
 								<ul className="grid w-full grid-cols-[repeat(auto-fit,_minmax(250px,1fr))] items-stretch gap-4 text-black">
