@@ -10,32 +10,32 @@
 		"lint": "eslint \"src/**/*.{jsx,js,astro,css}\""
 	},
 	"dependencies": {
-		"@astrojs/react": "^4.2.7",
-		"@astrojs/vercel": "^8.1.4",
+		"@astrojs/react": "^4.3.0",
+		"@astrojs/vercel": "^8.2.6",
 		"@formkit/tempo": "^0.1.2",
 		"@pheralb/toast": "^1.0.0",
-		"@radix-ui/react-dialog": "^1.1.11",
-		"@tailwindcss/vite": "^4.1.5",
-		"@types/react": "^18.3.20",
+		"@radix-ui/react-dialog": "^1.1.15",
+		"@tailwindcss/vite": "^4.1.12",
+		"@types/react": "^18.3.23",
 		"@types/react-dom": "^18.3.7",
-		"astro": "^5.7.10",
-		"lucide-react": "^0.506.0",
+		"astro": "^5.13.2",
+		"lucide-react": "^0.540.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"tailwindcss": "^4.1.5",
+		"tailwindcss": "^4.1.12",
 		"tslib": "^2.8.1"
 	},
-	"packageManager": "pnpm@10.10.0",
+	"packageManager": "pnpm@10.15.0",
 	"devDependencies": {
-		"@eslint/js": "^9.25.1",
-		"eslint": "^9.25.1",
+		"@eslint/js": "^9.33.0",
+		"eslint": "^9.33.0",
 		"eslint-plugin-astro": "^1.3.1",
 		"eslint-plugin-jsx-a11y": "^6.10.2",
-		"eslint-plugin-prettier": "^5.2.6",
-		"globals": "^16.0.0",
-		"prettier": "^3.5.3",
+		"eslint-plugin-prettier": "^5.5.4",
+		"globals": "^16.3.0",
+		"prettier": "^3.6.2",
 		"prettier-plugin-astro": "^0.14.1",
-		"prettier-plugin-tailwindcss": "^0.6.11",
-		"typescript-eslint": "^8.31.1"
+		"prettier-plugin-tailwindcss": "^0.6.14",
+		"typescript-eslint": "^8.40.0"
 	}
 }
