@@ -42,7 +42,7 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 				},
 			)
 			const response = await fetchApi.json()
-			setNotes(response.data)
+			setNotes(response.data || [])
 		} catch (error) {
 			setError(error)
 		} finally {
