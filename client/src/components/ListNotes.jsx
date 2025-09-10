@@ -41,6 +41,17 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 					},
 				},
 			)
+			// Verificar si la respuesta es exitosa
+			if (!fetchApi.ok) {
+				// Si la respuesta es 401, posiblemente el token expiró
+				if (fetchApi.status === 401) {
+					// Limpiar el localstorage y redirigir al login
+					window.localStorage.removeItem('user')
+					window.location.href = '/'
+					return
+				}
+				throw new Error(`Error ${fetchApi.status}: ${fetchApi.statusText}`)
+			}
 			const response = await fetchApi.json()
 			setNotes(response.data || [])
 		} catch (error) {
