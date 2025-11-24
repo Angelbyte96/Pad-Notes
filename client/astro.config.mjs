@@ -1,6 +1,7 @@
 import react from '@astrojs/react'
 import vercel from '@astrojs/vercel'
 import clerk from '@clerk/astro'
+import { esMX } from '@clerk/localizations'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 
@@ -42,5 +43,10 @@ export default defineConfig({
 			},
 		},
 	},
-	integrations: [react(), clerk()],
+	integrations: [
+		react(),
+		clerk({
+			localization: esMX,
+		}),
+	],
 })
