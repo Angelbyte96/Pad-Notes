@@ -1,11 +1,39 @@
 ---
-import App from '@/components/App.jsx'
 import Layout from '@/layouts/Layout.astro'
+import { SignedOut, SignInButton } from '@clerk/astro/components'
+
+const urlRedirect = import.meta.env.PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<App client:only='react' />
+	<main class="mt-10 mb-2 flex w-full flex-col items-center justify-center gap-4 md:mt-0">
+		<div class="flex w-9/12 flex-col items-center gap-4">
+			<h1 class="text-center text-3xl font-semibold text-black md:text-6xl dark:text-white">
+				Organiza tus ideas de forma simple y rápida
+			</h1>
+			<p
+				class="w-11/12 text-center text-base font-medium text-black md:w-8/12 md:text-lg dark:text-white"
+			>
+				Un sitio <span class="text-[#FF5722]">simple</span> y{' '}
+				<span class="text-[#FF5722]">minimalista</span>, diseñado para que puedas
+				<span class="text-[#FF5722]"> guardar</span> información,{' '}
+				<span class="text-[#FF5722]">ideas</span> y todo aquello que inspire tu día a día. Disfruta de
+				una experiencia <span class="text-[#FF5722]">limpia</span> y{' '}
+				<span class="text-[#FF5722]">directa</span>, donde lo esencial es organizar y conservar tus
+				pensamientos sin complicaciones.
+			</p>
+			<SignedOut>
+				<SignInButton
+					class={'flex cursor-pointer items-center justify-center gap-1 rounded-md bg-yellow-500 p-1 text-base font-bold md:text-lg'}
+					mode="modal"
+					forceRedirectUrl={urlRedirect}
+				>
+					Iniciar sesión
+				</SignInButton>
+			</SignedOut>
+		</div>
+	</main>
 </Layout>
