@@ -1,20 +1,36 @@
 /* eslint-disable react/prop-types */
+import { $authStore } from '@clerk/astro/client'
+import { useStore } from '@nanostores/react'
 import { StickyNote } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ModalRadix } from './ModalRadix'
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
 const SendNotes = ({ onNoteAdded }) => {
+	const auth = useStore($authStore)
+	const [token, setToken] = useState(null)
 	const [noteTitle, setNoteTitle] = useState('')
 	const [note, setNote] = useState('')
 	const [isOpen, setIsOpen] = useState(false)
 
+	// Obtener token de Clerk
+	useEffect(() => {
+		const fetchToken = async () => {
+			if (auth.getToken) {
+				const clerkToken = await auth.getToken()
+				setToken(clerkToken)
+			}
+		}
+		fetchToken()
+	}, [auth])
+
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 
-		const user = JSON.parse(localStorage.getItem('user'))
-
-		const token = user ? JSON.parse(localStorage.getItem('user')).token : null
+		if (!token || !auth.userId) {
+			console.error('No hay token o userId disponible')
+			return
+		}
 
 		try {
 			const response = await fetch(`${STRAPI_URL}/api/note`, {
@@ -24,7 +40,7 @@ const SendNotes = ({ onNoteAdded }) => {
 					Authorization: `Bearer ${token}`,
 				},
 				body: JSON.stringify({
-					data: { title: noteTitle, text_note: note, user: user.id },
+					data: { title: noteTitle, text_note: note, user: auth.userId },
 				}),
 			})
 

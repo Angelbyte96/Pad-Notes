@@ -1,10 +1,27 @@
 /* eslint-disable react/prop-types */
+import { useChangeNotes } from '@/hooks/useChangeNotes'
 import { useNotesActions } from '@/hooks/useNotesActions'
+import { $authStore } from '@clerk/astro/client'
+import { useStore } from '@nanostores/react'
 import { useCallback, useEffect, useState } from 'react'
 import { NoteArticle } from './NoteArticle'
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
-const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
+const ListNotes = ({ userName }) => {
+	const { refreshNotes, handleNoteAdded } = useChangeNotes()
+	const auth = useStore($authStore)
+	const [token, setToken] = useState(null)
+
+	useEffect(() => {
+		const fetchToken = async () => {
+			if (auth.getToken) {
+				const clerkToken = await auth.getToken()
+				setToken(clerkToken)
+			}
+		}
+		fetchToken()
+	}, [auth])
+
 	const [notes, setNotes] = useState([])
 	const [noteTitle, setNoteTitle] = useState('')
 	const [noteMessage, setNoteMessage] = useState('')
@@ -12,16 +29,10 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	const [error, setError] = useState(null)
 	const [editingNoteId, setEditingNoteId] = useState(null)
 
-	// Obtenemos el usuario desde localStorage
-	const storedUser = window.localStorage.getItem('user')
-	const user = storedUser ? JSON.parse(storedUser) : null
-	const token = user ? user.token : null
-	const userId = user ? user.id : null
-
 	const { handleDeleteNote, handleEditNote, handleCancelEdit, handleUpdate } = useNotesActions({
 		STRAPI_URL,
 		token,
-		onNoteAdded,
+		onNoteAdded: handleNoteAdded,
 		setEditingNoteId,
 		setNoteTitle,
 		setNoteMessage,
@@ -31,49 +42,28 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 	})
 
 	const fetchNotes = useCallback(async () => {
+		if (!token || !auth.userId) return
+
 		try {
 			setIsLoading(true)
-			const fetchApi = await fetch(
-				`${STRAPI_URL}/api/note?populate=user&filters[user][documentId]=${userId}&sort=updatedAt:desc`,
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				},
-			)
-			// Verificar si la respuesta es exitosa
-			if (!fetchApi.ok) {
-				// Si la respuesta es 401, posiblemente el token expiró
-				if (fetchApi.status === 401) {
-					// Limpiar el localstorage y redirigir al login
-					window.localStorage.removeItem('user')
-					window.location.href = '/'
-					return
-				}
-				throw new Error(`Error ${fetchApi.status}: ${fetchApi.statusText}`)
-			}
-			const response = await fetchApi.json()
-			setNotes(response.data || [])
+			// TODO: Implementar fetch a TursoDB
+			// Por ahora dejamos vacío para migración futura
+			setNotes([])
 		} catch (error) {
 			setError(error)
 		} finally {
 			setIsLoading(false)
 		}
-	}, [token, userId])
+	}, [token, auth.userId, refreshNotes])
 
 	useEffect(() => {
-		if (!token || !userId) {
+		if (!token || !auth.userId) {
 			setIsLoading(false)
 			return
 		}
 
 		fetchNotes()
-	}, [token, userId, refreshTrigger])
-
-	// Renderizamos un mensaje de usuario no autentificado sin retornar anticipadamente
-	if (!user) {
-		return <p>No hay usuario autentificado.</p>
-	}
+	}, [token, auth.userId, refreshNotes, fetchNotes])
 
 	return (
 		<NoteArticle
@@ -87,11 +77,11 @@ const ListNotes = ({ refreshTrigger, onNoteAdded }) => {
 			handleCancelEdit={handleCancelEdit}
 			editingNoteId={editingNoteId}
 			setEditingNoteId={setEditingNoteId}
-			noteMessage={noteMessage}
-			setNoteMessage={setNoteMessage}
-			setNoteTitle={setNoteTitle}
-			onNoteAdded={onNoteAdded}
-		/>
+		noteMessage={noteMessage}
+		setNoteMessage={setNoteMessage}
+		setNoteTitle={setNoteTitle}
+		onNoteAdded={handleNoteAdded}
+	/>
 	)
 }
 
