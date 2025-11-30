@@ -1,8 +1,7 @@
+import { toast } from '@pheralb/toast'
 import { useCallback } from 'react'
 
 const useNotesActions = ({
-	STRAPI_URL,
-	token,
 	onNoteAdded,
 	setEditingNoteId,
 	setNoteTitle,
@@ -12,54 +11,86 @@ const useNotesActions = ({
 	noteMessage,
 }) => {
 	const handleDeleteNote = useCallback(
-		async (noteToDelete) => {
+		async (noteId) => {
 			try {
-				await fetch(`${STRAPI_URL}/api/note/${noteToDelete}`, {
+				const response = await fetch(`/api/notes/${noteId}`, {
 					method: 'DELETE',
-					headers: { Authorization: `Bearer ${token}` },
+					headers: { 'Content-Type': 'application/json' },
 				})
+
+				const data = await response.json()
+
+				if (response.status === 429) {
+					toast.error({
+						text: 'Demasiadas solicitudes, intenta en unos segundos',
+					})
+					return
+				}
+
+				if (!response.ok) {
+					toast.error({ text: data.error || 'Error al eliminar la nota' })
+					return
+				}
+
+				toast.success({ text: 'Nota eliminada correctamente' })
 				onNoteAdded()
 			} catch (error) {
-				console.error(error)
+				console.error('Error al eliminar nota:', error)
+				toast.error({ text: 'Error al eliminar la nota' })
 			}
 		},
-		[token, onNoteAdded],
+		[onNoteAdded],
 	)
 
 	const handleEditNote = useCallback(
 		(note) => {
-			setEditingNoteId(note.documentId)
+			setEditingNoteId(note.id)
 			setNoteTitle(note.title)
-			setNoteMessage(note.text_note)
+			setNoteMessage(note.textNote)
 		},
 		[setEditingNoteId, setNoteTitle, setNoteMessage],
 	)
 
 	const handleCancelEdit = useCallback(() => {
 		setEditingNoteId(null)
-	}, [setEditingNoteId])
+		setNoteTitle('')
+		setNoteMessage('')
+	}, [setEditingNoteId, setNoteTitle, setNoteMessage])
 
 	const handleUpdate = async (e) => {
 		e.preventDefault()
 
 		try {
-			const response = await fetch(`${STRAPI_URL}/api/note/${editingNoteId}`, {
+			const response = await fetch(`/api/notes/${editingNoteId}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
 				},
-				body: JSON.stringify({ data: { title: noteTitle, text_note: noteMessage } }),
+				body: JSON.stringify({ title: noteTitle, textNote: noteMessage }),
 			})
 
-			if (!response.ok) throw new Error('Error al enviar la nota')
+			const data = await response.json()
 
+			if (response.status === 429) {
+				toast.error({
+					text: 'Demasiadas solicitudes, intenta en unos segundos',
+				})
+				return
+			}
+
+			if (!response.ok) {
+				toast.error({ text: data.error || 'Error al actualizar la nota' })
+				return
+			}
+
+			toast.success({ text: 'Nota actualizada correctamente' })
 			setNoteTitle('')
 			setNoteMessage('')
 			onNoteAdded()
 			setEditingNoteId(null)
 		} catch (error) {
-			console.error(error)
+			console.error('Error al actualizar nota:', error)
+			toast.error({ text: 'Error al actualizar la nota' })
 		}
 	}
 

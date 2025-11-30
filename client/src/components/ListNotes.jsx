@@ -1,27 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useChangeNotes } from '@/hooks/useChangeNotes'
 import { useNotesActions } from '@/hooks/useNotesActions'
-import { $authStore } from '@clerk/astro/client'
-import { useStore } from '@nanostores/react'
+import { toast } from '@pheralb/toast'
 import { useCallback, useEffect, useState } from 'react'
 import { NoteArticle } from './NoteArticle'
-const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
 const ListNotes = ({ userName }) => {
 	const { refreshNotes, handleNoteAdded } = useChangeNotes()
-	const auth = useStore($authStore)
-	const [token, setToken] = useState(null)
-
-	useEffect(() => {
-		const fetchToken = async () => {
-			if (auth.getToken) {
-				const clerkToken = await auth.getToken()
-				setToken(clerkToken)
-			}
-		}
-		fetchToken()
-	}, [auth])
-
 	const [notes, setNotes] = useState([])
 	const [noteTitle, setNoteTitle] = useState('')
 	const [noteMessage, setNoteMessage] = useState('')
@@ -30,8 +15,6 @@ const ListNotes = ({ userName }) => {
 	const [editingNoteId, setEditingNoteId] = useState(null)
 
 	const { handleDeleteNote, handleEditNote, handleCancelEdit, handleUpdate } = useNotesActions({
-		STRAPI_URL,
-		token,
 		onNoteAdded: handleNoteAdded,
 		setEditingNoteId,
 		setNoteTitle,
@@ -42,28 +25,35 @@ const ListNotes = ({ userName }) => {
 	})
 
 	const fetchNotes = useCallback(async () => {
-		if (!token || !auth.userId) return
-
 		try {
 			setIsLoading(true)
-			// TODO: Implementar fetch a TursoDB
-			// Por ahora dejamos vacío para migración futura
-			setNotes([])
+			const response = await fetch('/api/notes')
+
+			if (response.status === 429) {
+				toast.error({
+					text: 'Demasiadas solicitudes, intenta en unos segundos',
+				})
+				return
+			}
+
+			if (!response.ok) {
+				throw new Error('Error al cargar las notas')
+			}
+
+			const data = await response.json()
+			setNotes(data.data || [])
 		} catch (error) {
+			console.error('Error al obtener notas:', error)
 			setError(error)
+			toast.error({ text: 'Error al cargar las notas' })
 		} finally {
 			setIsLoading(false)
 		}
-	}, [token, auth.userId, refreshNotes])
+	}, [refreshNotes])
 
 	useEffect(() => {
-		if (!token || !auth.userId) {
-			setIsLoading(false)
-			return
-		}
-
 		fetchNotes()
-	}, [token, auth.userId, refreshNotes, fetchNotes])
+	}, [refreshNotes, fetchNotes])
 
 	return (
 		<NoteArticle
