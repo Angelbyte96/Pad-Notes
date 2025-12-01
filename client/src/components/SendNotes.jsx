@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
+import { toast } from '@pheralb/toast'
 import { StickyNote } from 'lucide-react'
 import { useState } from 'react'
 import { ModalRadix } from './ModalRadix'
-const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_HOST
 
 const SendNotes = ({ onNoteAdded }) => {
 	const [noteTitle, setNoteTitle] = useState('')
@@ -12,31 +12,40 @@ const SendNotes = ({ onNoteAdded }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 
-		const user = JSON.parse(localStorage.getItem('user'))
-
-		const token = user ? JSON.parse(localStorage.getItem('user')).token : null
-
 		try {
-			const response = await fetch(`${STRAPI_URL}/api/note`, {
+			const response = await fetch('/api/notes', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
 				},
 				body: JSON.stringify({
-					data: { title: noteTitle, text_note: note, user: user.id },
+					title: noteTitle,
+					textNote: note,
 				}),
 			})
 
-			if (!response.ok) throw new Error('Error al enviar la nota')
+			const data = await response.json()
 
+			if (response.status === 429) {
+				toast.error({
+					text: 'Demasiadas solicitudes, intenta en unos segundos',
+				})
+				return
+			}
+
+			if (!response.ok) {
+				toast.error({ text: data.error || 'Error al crear la nota' })
+				return
+			}
+
+			toast.success({ text: 'Nota creada correctamente' })
 			setNoteTitle('')
 			setNote('')
-
 			onNoteAdded()
 			setIsOpen(false)
 		} catch (error) {
-			console.error(error)
+			console.error('Error al crear nota:', error)
+			toast.error({ text: 'Error al crear la nota' })
 		}
 	}
 
@@ -48,7 +57,7 @@ const SendNotes = ({ onNoteAdded }) => {
 				isOpen={isOpen}
 				onOpenChange={setIsOpen}
 				trigger={
-					<button className="flex cursor-pointer text-sm md:text-base items-center gap-2 self-end rounded-md bg-green-700 px-2 py-1 font-semibold text-white hover:bg-green-800">
+					<button className="flex cursor-pointer items-center gap-2 self-end rounded-md bg-green-700 px-2 py-1 text-sm font-semibold text-white hover:bg-green-800 md:text-base">
 						Nueva nota{' '}
 						<span>
 							<StickyNote width={18} height={18} />
@@ -57,7 +66,7 @@ const SendNotes = ({ onNoteAdded }) => {
 				}
 			>
 				<section id="sendNotes" className="flex w-full flex-col items-center gap-4">
-					<h3 className="text-xl text-black dark:text-white md:text-2xl">Ingresa alguna nota</h3>
+					<h3 className="text-xl text-black md:text-2xl dark:text-white">Ingresa alguna nota</h3>
 					<form className="flex w-full flex-col justify-center gap-2" onSubmit={handleSubmit}>
 						<input
 							type="text"

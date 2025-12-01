@@ -1,6 +1,6 @@
 ---
-import { Footer } from '@/components/Footer.jsx'
-import { Nav } from '@/components/Nav.jsx'
+import Footer  from '@/components/Footer.astro'
+import Nav from '@/components/Nav.astro'
 import { Toaster } from '@pheralb/toast'
 import '../styles/global.css'
 ---
@@ -28,7 +28,7 @@ import '../styles/global.css'
 	<body
 		class="bg-home grid h-[100vh] min-h-screen grid-rows-[auto_1fr_auto] place-items-start gap-2 md:place-items-center"
 	>
-		<Nav client:load/>
+		<Nav />
 		<slot />
 		<Footer />
 		<Toaster theme='light' client:load />

@@ -82,15 +82,13 @@ const NoteArticle = ({
 				<section className="flex h-full w-full flex-col gap-4">
 					<FilterSearch searchText={searchTerm} setSearchText={setSearchTerm} />
 					{(() => {
-						const filteredNotes = notes.filter((note) => {
-							if (searchTerm === '') return true
-							return (
-								note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-								note.text_note.toLowerCase().includes(searchTerm.toLowerCase())
-							)
-						})
-
-						// Mostrar mensaje o notas filtradas
+					const filteredNotes = notes.filter((note) => {
+						if (searchTerm === '') return true
+						return (
+							note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+							note.textNote.toLowerCase().includes(searchTerm.toLowerCase())
+						)
+					})						// Mostrar mensaje o notas filtradas
 						if (filteredNotes.length === 0) {
 							return (
 								<p className="text-center text-xl text-black md:text-2xl dark:text-white">
@@ -119,8 +117,8 @@ const NoteArticle = ({
 									</div>
 								)}
 								<ul className="grid w-full grid-cols-[repeat(auto-fit,_minmax(250px,1fr))] items-stretch gap-4 text-black">
-									{filteredNotes.map((note) => {
-										const isUnchanged = noteTitle === note.title && noteMessage === note.text_note
+										{filteredNotes.map((note) => {
+											const isUnchanged = noteTitle === note.title && noteMessage === note.textNote
 										const dateCreatedAt = note.createdAt
 										const dateCreated = format(dateCreatedAt, 'D MMMM YYYY', 'es')
 										const dateUpdatedAt = note.updatedAt
@@ -135,8 +133,8 @@ const NoteArticle = ({
 																{highLightMatch(note.title, searchTerm)}
 															</h2>
 															<p className="mb-2.5 w-full self-start overflow-hidden text-sm text-ellipsis whitespace-nowrap text-black md:text-lg dark:text-white">
-																{highLightMatch(note.text_note.split('\n')[0], searchTerm)}
-																{note.text_note.includes('\n') ? '...' : ''}
+																{highLightMatch(note.textNote.split('\n')[0], searchTerm)}
+																{note.textNote.includes('\n') ? '...' : ''}
 															</p>
 															<div className="self-end text-xs text-[#808692] md:text-sm">
 																<span>Editado: </span>
@@ -145,10 +143,10 @@ const NoteArticle = ({
 														</div>
 													}
 													title={note.title}
-													description={note.text_note}
+													description={note.textNote}
 												>
-													<div className="flex h-full w-full flex-col items-center justify-between gap-4">
-														{editingNoteId === note.documentId ? (
+												<div className="flex h-full w-full flex-col items-center justify-between gap-4">
+													{editingNoteId === note.id ? (
 															<>
 																<section className="flex w-full flex-col gap-2">
 																	<label htmlFor="noteTitle" className="flex w-fit gap-1">
@@ -211,7 +209,7 @@ const NoteArticle = ({
 																	{highLightMatch(note.title, searchTerm)}
 																</h2>
 																<p className="my-4 self-start text-start break-words whitespace-pre-line text-black dark:text-white">
-																	{highLightMatch(note.text_note, searchTerm)}
+																	{highLightMatch(note.textNote, searchTerm)}
 																</p>
 																<div className="flex w-full justify-between gap-2 border-t-1 border-[#e5e7eb] py-2">
 																	{/* <button
@@ -244,20 +242,20 @@ const NoteArticle = ({
 																				>
 																					Volver
 																				</button>
-																				<button
-																					className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-red-700 px-2.5 py-[0.1rem] text-sm font-semibold text-white transition hover:scale-105 focus:ring-2 focus:ring-blue-200 focus:outline-none"
-																					onClick={() => {
-																						handleDeleteNote(note.documentId)
-																						setIsOpen(false)
-																					}}
-																				>
+																			<button
+																				className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-red-700 px-2.5 py-[0.1rem] text-sm font-semibold text-white transition hover:scale-105 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+																				onClick={() => {
+																					handleDeleteNote(note.id)
+																					setIsOpen(false)
+																				}}
+																			>
 																					Eliminar
 																				</button>
 																			</div>
 																		</section>
 																	</ModalRadix>
-																	<div className="flex gap-2">
-																		<ButtonCopy note={note.text_note} />
+																			<div className="flex gap-2">
+																				<ButtonCopy note={note.textNote} />
 																		<button
 																			className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-blue-400 px-2.5 py-[0.1rem] text-sm font-semibold transition hover:scale-105 focus:ring-1 focus:ring-white focus:outline-none"
 																			onClick={() => handleEditNote(note)}
