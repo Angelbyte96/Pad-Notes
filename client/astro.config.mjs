@@ -31,13 +31,6 @@ export default defineConfig({
 			dedupe: ['react', 'react-dom'],
 		},
 		build: {
-			rollupOptions: {
-				output: {
-					manualChunks: {
-						framework: ['react', 'react-dom'],
-					},
-				},
-			},
 			commonjsOptions: {
 				include: [/tslib/, /node_modules/],
 			},

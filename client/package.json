@@ -10,9 +10,9 @@
 		"lint": "eslint \"src/**/*.{jsx,js,astro,css}\""
 	},
 	"dependencies": {
-		"@astrojs/react": "^4.3.0",
-		"@astrojs/vercel": "^8.2.6",
-		"@clerk/astro": "^2.15.1",
+		"@astrojs/react": "^5.0.6",
+		"@astrojs/vercel": "^10.0.8",
+		"@clerk/astro": "^3.3.2",
 		"@clerk/clerk-react": "^5.56.2",
 		"@clerk/localizations": "^3.28.3",
 		"@formkit/tempo": "^0.1.2",
@@ -26,7 +26,7 @@
 		"@types/react-dom": "^18.3.7",
 		"@upstash/ratelimit": "^2.0.7",
 		"@upstash/redis": "^1.35.6",
-		"astro": "^5.13.2",
+		"astro": "^6.4.2",
 		"drizzle-orm": "^0.44.7",
 		"lucide-react": "^0.540.0",
 		"react": "^18.3.1",
@@ -35,7 +35,7 @@
 		"tslib": "^2.8.1",
 		"zod": "^4.1.12"
 	},
-	"packageManager": "pnpm@10.15.0",
+	"packageManager": "pnpm@11.5.0",
 	"devDependencies": {
 		"@eslint/js": "^9.33.0",
 		"drizzle-kit": "^0.31.7",
