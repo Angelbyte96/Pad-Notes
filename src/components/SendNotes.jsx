@@ -68,7 +68,7 @@ const SendNotes = ({ onNoteAdded }) => {
 					<form className="flex w-full flex-col justify-center gap-2" onSubmit={handleSubmit}>
 						<input
 							type="text"
-							className="w-full rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 text-sm text-black outline-none transition-all placeholder:text-[#aaa] focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 dark:border-white/[0.1] dark:bg-[#1e1e1e] dark:text-white dark:placeholder-[#555]"
+							className="w-full rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 text-sm text-black outline-none transition-all placeholder:text-[#aaa] focus:border-accent-400 focus:ring-2 focus:ring-accent-400/20 dark:border-white/[0.1] dark:bg-[#1e1e1e] dark:text-white dark:placeholder-[#555]"
 							id="title"
 							name="title"
 							value={noteTitle}
@@ -77,7 +77,7 @@ const SendNotes = ({ onNoteAdded }) => {
 						/>
 						<textarea
 							type="text"
-							className="field-sizing-content w-full break-words whitespace-normal rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 text-sm text-black outline-none transition-all placeholder:text-[#aaa] focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 dark:border-white/[0.1] dark:bg-[#1e1e1e] dark:text-white dark:placeholder-[#555]"
+							className="field-sizing-content w-full break-words whitespace-normal rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 text-sm text-black outline-none transition-all placeholder:text-[#aaa] focus:border-accent-400 focus:ring-2 focus:ring-accent-400/20 dark:border-white/[0.1] dark:bg-[#1e1e1e] dark:text-white dark:placeholder-[#555]"
 							id="note"
 							name="note"
 							value={note}

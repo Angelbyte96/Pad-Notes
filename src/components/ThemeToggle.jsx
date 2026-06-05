@@ -32,7 +32,7 @@ function ThemeToggle() {
     if (!mounted) {
         return (
             <button
-                className="justify-self-end text-black dark:text-white"
+                className="justify-self-end rounded-full p-2 text-[#333] dark:text-[#ccc]"
                 aria-label="Alternar tema"
             >
                 <div className="w-5 h-5"></div>
@@ -42,7 +42,7 @@ function ThemeToggle() {
 
     return (
         <button
-            className="justify-self-end text-black dark:text-white hover:cursor-pointer"
+            className="justify-self-end rounded-full p-2 text-[#333] transition-colors hover:cursor-pointer hover:bg-black/5 dark:text-[#ccc] dark:hover:bg-white/10"
             onClick={toggleTheme}
             aria-label="Alternar tema"
         >

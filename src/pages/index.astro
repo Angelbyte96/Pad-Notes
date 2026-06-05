@@ -17,17 +17,17 @@ const urlRedirect = import.meta.env.PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL
 			<p
 				class="w-11/12 text-center text-base font-medium text-black md:w-8/12 md:text-lg dark:text-white"
 			>
-				Un sitio <span class="text-[#FF5722]">simple</span> y{' '}
-				<span class="text-[#FF5722]">minimalista</span>, diseñado para que puedas
-				<span class="text-[#FF5722]"> guardar</span> información,{' '}
-				<span class="text-[#FF5722]">ideas</span> y todo aquello que inspire tu día a día. Disfruta de
-				una experiencia <span class="text-[#FF5722]">limpia</span> y{' '}
-				<span class="text-[#FF5722]">directa</span>, donde lo esencial es organizar y conservar tus
+				Un sitio <span class="text-accent-500 dark:text-accent-400">simple</span> y{' '}
+				<span class="text-accent-500 dark:text-accent-400">minimalista</span>, diseñado para que puedas
+				<span class="text-accent-500 dark:text-accent-400"> guardar</span> información,{' '}
+				<span class="text-accent-500 dark:text-accent-400">ideas</span> y todo aquello que inspire tu día a día. Disfruta de
+				una experiencia <span class="text-accent-500 dark:text-accent-400">limpia</span> y{' '}
+				<span class="text-accent-500 dark:text-accent-400">directa</span>, donde lo esencial es organizar y conservar tus
 				pensamientos sin complicaciones.
 			</p>
 			<Show when="signed-out">
 				<SignInButton
-					class={'flex cursor-pointer items-center justify-center gap-1 rounded-md bg-yellow-500 p-1 text-base font-bold md:text-lg'}
+					class={'flex cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-accent-200 bg-accent-50 px-4 py-2 text-base font-semibold text-accent-700 transition-all duration-200 hover:bg-accent-100 dark:border-accent-500/20 dark:bg-accent-500/[0.12] dark:text-accent-400 dark:hover:bg-accent-500/20'}
 					mode="modal"
 					forceRedirectUrl={urlRedirect}
 				>
