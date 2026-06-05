@@ -1,9 +1,11 @@
 import { ModalRadix } from '@/components/ModalRadix'
 import { SendNotes } from '@/components/SendNotes'
 import { FilterSearch } from '@/components/filterSearch'
+import { Toaster } from '@pheralb/toast'
 import { format } from '@formkit/tempo'
-import { Check, Eraser, SquarePen, Trash2, X } from 'lucide-react'
-import { useState } from 'react'
+import { CalendarDays, Check, Clock, Eraser, SquarePen, Trash2, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { ButtonCopy } from './ButtonCopy'
 
 const NoteArticle = ({
@@ -49,7 +51,12 @@ const NoteArticle = ({
 		})
 	}
 
+	const [mounted, setMounted] = useState(false)
+	useEffect(() => { setMounted(true) }, [])
+
 	return (
+		<>
+		{mounted && createPortal(<Toaster theme="dark" />, document.body)}
 		<div className="bg-opacity-80 flex w-10/12 flex-col items-center gap-4 rounded-lg border-[1px] border-gray-300 bg-slate-50 p-4 shadow-md shadow-black/30 backdrop-blur-sm dark:bg-[#202020]">
 			<h1 className="text-center text-2xl font-semibold text-black md:text-4xl dark:text-white">
 				Tus notas
@@ -128,17 +135,22 @@ const NoteArticle = ({
 												<ModalRadix
 													client:only
 													trigger={
-														<div className="group relative flex h-full w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-[1px] border-[#e5e5e5] bg-white px-4 py-2 shadow-md shadow-black/30 backdrop-blur-sm hover:bg-slate-50 hover:shadow-black/50 dark:bg-[#2c2c2c] dark:shadow-white/30 dark:hover:bg-[#1f1f1f]">
-															<h2 className="self-start font-bold text-black uppercase md:text-xl dark:text-white">
-																{highLightMatch(note.title, searchTerm)}
-															</h2>
-															<p className="mb-2.5 w-full self-start overflow-hidden text-sm text-ellipsis whitespace-nowrap text-black md:text-lg dark:text-white">
-																{highLightMatch(note.textNote.split('\n')[0], searchTerm)}
-																{note.textNote.includes('\n') ? '...' : ''}
-															</p>
-															<div className="self-end text-xs text-[#808692] md:text-sm">
-																<span>Editado: </span>
-																<span>{dateUpdated}</span>
+														<div className="group relative flex h-full w-full cursor-pointer flex-col justify-between gap-3 overflow-hidden rounded-xl border border-[#e8e8e8] bg-white px-5 py-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-amber-200/60 hover:shadow-lg dark:border-white/[0.07] dark:bg-[#262626] dark:hover:border-amber-500/20 dark:hover:bg-[#2d2d2d] dark:hover:shadow-black/50">
+															<div className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-amber-400 to-orange-400 transition-transform duration-500 group-hover:scale-x-100" />
+															<div className="mt-1 flex flex-col gap-1.5">
+																<h2 className="self-start text-sm font-bold tracking-widest text-black uppercase dark:text-white">
+																	{highLightMatch(note.title, searchTerm)}
+																</h2>
+																<p className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-relaxed text-[#777] dark:text-[#999]">
+																	{highLightMatch(note.textNote.split('\n')[0], searchTerm)}
+																	{note.textNote.includes('\n') ? '...' : ''}
+																</p>
+															</div>
+															<div className="flex items-center gap-1 self-end">
+																<Clock size={10} className="text-[#c0c0c0] dark:text-[#555]" />
+																<span className="text-[10px] font-medium tracking-wide text-[#bbb] uppercase dark:text-[#555]">
+																	{dateUpdated}
+																</span>
 															</div>
 														</div>
 													}
@@ -148,102 +160,84 @@ const NoteArticle = ({
 												<div className="flex h-full w-full flex-col items-center justify-between gap-4">
 													{editingNoteId === note.id ? (
 															<>
-																<section className="flex w-full flex-col gap-2">
-																	<label htmlFor="noteTitle" className="flex w-fit gap-1">
-																		<span className="font-semibold text-slate-800 dark:text-white">
-																			Titulo
-																		</span>
+																<section className="flex w-full flex-col gap-1.5">
+																	<label htmlFor="noteTitle" className="text-[11px] font-semibold tracking-widest text-[#888] uppercase dark:text-[#666]">
+																		Título
 																	</label>
 																	<input
 																		type="text"
 																		value={noteTitle}
-																		className="field-sizing-content w-full resize-none rounded-lg border-1 border-[#e5e7eb] px-2 py-1 text-start break-all whitespace-normal text-black uppercase focus:border-transparent focus:ring-2 focus:ring-slate-700 focus:outline-none dark:text-white dark:focus:ring-slate-400"
+																		className="w-full rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 text-sm font-bold tracking-widest text-black uppercase outline-none transition-all focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 dark:border-white/[0.1] dark:bg-[#1e1e1e] dark:text-white dark:focus:border-amber-500 dark:focus:ring-amber-500/20"
 																		onChange={(e) => setNoteTitle(e.target.value)}
 																		name="noteTitle"
 																		id="noteTitle"
 																	/>
 																</section>
-																<section className="flex w-full flex-col gap-2">
-																	<label htmlFor="noteDescrip" className="flex w-fit gap-1">
-																		<span className="font-semibold text-slate-800 dark:text-white">
-																			Descripción
-																		</span>
+																<section className="flex w-full flex-col gap-1.5">
+																	<label htmlFor="noteDescrip" className="text-[11px] font-semibold tracking-widest text-[#888] uppercase dark:text-[#666]">
+																		Descripción
 																	</label>
 																	<textarea
 																		name="noteDescrip"
 																		id="noteDescrip"
 																		value={noteMessage}
-																		className="field-sizing-content min-h-10 w-full resize-none rounded-lg border-1 border-[#ccc] px-2 py-1 text-start break-words whitespace-normal text-black focus:border-transparent focus:ring-2 focus:ring-slate-700 focus:outline-none dark:text-white dark:focus:ring-slate-400"
+																		className="min-h-[80px] w-full resize-none rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 text-[13px] leading-relaxed text-[#333] outline-none transition-all focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 dark:border-white/[0.1] dark:bg-[#1e1e1e] dark:text-[#ddd] dark:focus:border-amber-500 dark:focus:ring-amber-500/20"
 																		onChange={(e) => setNoteMessage(e.target.value)}
 																	></textarea>
 																</section>
-																<div className="flex gap-4 self-end">
+																<div className="flex w-full items-center justify-end gap-2 border-t border-[#f0f0f0] pt-3 dark:border-white/[0.07]">
 																	<button
-																		className="cursor-pointer self-end rounded-lg bg-red-700 px-2.5 py-[0.1rem] text-sm font-semibold"
+																		className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 transition-all duration-200 hover:bg-red-100 dark:bg-red-500/[0.12] dark:text-red-400 dark:hover:bg-red-500/20"
 																		onClick={handleCancelEdit}
 																	>
-																		<X
-																			size={20}
-																			className="p-0.5 text-white group-hover:transform group-hover:animate-pulse"
-																		/>
+																		<X size={13} />
+																		Cancelar
 																	</button>
 																	<button
-																		className="cursor-pointer self-end rounded-lg bg-green-700 px-2.5 py-[0.1rem] text-sm font-semibold disabled:cursor-not-allowed disabled:bg-gray-500"
+																		className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-green-50 px-3 py-1.5 text-xs font-semibold text-green-700 transition-all duration-200 hover:bg-green-100 disabled:cursor-not-allowed disabled:opacity-40 dark:bg-green-500/[0.12] dark:text-green-400 dark:hover:bg-green-500/20"
 																		onClick={handleUpdate}
 																		disabled={isUnchanged}
 																	>
-																		<Check
-																			size={20}
-																			className="p-0.5 text-white group-hover:transform group-hover:animate-pulse"
-																		/>
+																		<Check size={13} />
+																		Guardar
 																	</button>
 																</div>
 															</>
 														) : (
 															<>
-																<div className="self-start text-sm text-black dark:text-white">
-																	<span>Creado: </span>
-																	<span>{dateCreated}</span>
-																</div>
-																<h2 className="self-start text-xl font-bold text-black uppercase dark:text-white">
+																<span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-700 dark:bg-amber-500/10 dark:text-amber-400">
+																	<CalendarDays size={11} />
+																	{dateCreated}
+																</span>
+																<h2 className="self-start text-xl font-bold tracking-wider text-black uppercase dark:text-white">
 																	{highLightMatch(note.title, searchTerm)}
 																</h2>
-																<p className="my-4 self-start text-start break-words whitespace-pre-line text-black dark:text-white">
+																<p className="my-2 self-start text-start text-[13px] leading-loose break-words whitespace-pre-line text-[#555] dark:text-[#c0c0c0]">
 																	{highLightMatch(note.textNote, searchTerm)}
 																</p>
-																<div className="flex w-full justify-between gap-2 border-t-1 border-[#e5e7eb] py-2">
-																	{/* <button
-															className='bg-red-700 self-end px-2.5 py-[0.1rem] rounded-lg font-semibold text-sm cursor-pointer transition hover:scale-105 focus:border-blue-700 focus:outline-none'
-															onClick={() => handleDeleteNote(note.documentId)}>
-															<Trash2
-																size={20}
-																className='text-white p-0.5 hover:transform hover:animate-pulse'
-															/>
-														</button> */}
+																<div className="flex w-full items-center justify-between gap-2 border-t border-[#f0f0f0] pt-3 dark:border-white/[0.07]">
 																	<ModalRadix
 																		isOpen={isOpen}
 																		onOpenChange={setIsOpen}
 																		trigger={
-																			<button className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-red-700 px-2.5 py-[0.1rem] text-sm font-semibold transition hover:scale-105 focus:ring-1 focus:ring-white focus:outline-none">
-																				<Trash2
-																					size={20}
-																					className="p-0.5 text-white hover:transform hover:animate-pulse"
-																				/>
+																			<button className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 transition-all duration-200 hover:bg-red-100 dark:bg-red-500/[0.12] dark:text-red-400 dark:hover:bg-red-500/20">
+																				<Trash2 size={13} />
+																				Eliminar
 																			</button>
 																		}
 																	>
 																		<section className="flex flex-col gap-4 text-black dark:text-white">
 																			<h3>Estás seguro?</h3>
 																			<p>Esta acción no se puede deshacer</p>
-																			<div className="focus:ring-opacity-30 flex justify-end gap-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
+																			<div className="flex justify-end gap-2">
 																				<button
-																					className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-slate-500 px-2.5 py-[0.1rem] text-sm font-semibold text-white transition hover:scale-105 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+																					className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-[#f0f0f0] px-3 py-1.5 text-xs font-semibold text-[#555] transition-all duration-200 hover:bg-[#e5e5e5] dark:bg-white/8 dark:text-[#aaa] dark:hover:bg-white/12"
 																					onClick={() => setIsOpen(false)}
 																				>
 																					Volver
 																				</button>
 																			<button
-																				className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-red-700 px-2.5 py-[0.1rem] text-sm font-semibold text-white transition hover:scale-105 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+																				className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 transition-all duration-200 hover:bg-red-100 dark:bg-red-500/[0.12] dark:text-red-400 dark:hover:bg-red-500/20"
 																				onClick={() => {
 																					handleDeleteNote(note.id)
 																					setIsOpen(false)
@@ -254,16 +248,14 @@ const NoteArticle = ({
 																			</div>
 																		</section>
 																	</ModalRadix>
-																			<div className="flex gap-2">
-																				<ButtonCopy note={note.textNote} />
+																	<div className="flex gap-2">
+																		<ButtonCopy note={note.textNote} />
 																		<button
-																			className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-blue-400 px-2.5 py-[0.1rem] text-sm font-semibold transition hover:scale-105 focus:ring-1 focus:ring-white focus:outline-none"
+																			className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-600 transition-all duration-200 hover:bg-blue-100 dark:bg-blue-500/[0.12] dark:text-blue-400 dark:hover:bg-blue-500/20"
 																			onClick={() => handleEditNote(note)}
 																		>
-																			<SquarePen
-																				size={20}
-																				className="p-0.5 text-white hover:transform hover:animate-pulse"
-																			/>
+																			<SquarePen size={13} />
+																			Editar
 																		</button>
 																	</div>
 																</div>
@@ -281,6 +273,7 @@ const NoteArticle = ({
 				</section>
 			)}
 		</div>
+		</>
 	)
 }
 

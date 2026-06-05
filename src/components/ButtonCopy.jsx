@@ -13,10 +13,11 @@ const ButtonCopy = ({ note }) => {
 
 	return (
 		<button
-			className="focus:ring-opacity-30 cursor-pointer self-end rounded-lg bg-gray-700 px-2.5 py-[0.1rem] text-sm font-semibold transition hover:scale-105 focus:ring-1 focus:ring-white focus:outline-none"
+			className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-[#f0f0f0] px-3 py-1.5 text-xs font-semibold text-[#555] transition-all duration-200 hover:bg-[#e5e5e5] dark:bg-white/[0.08] dark:text-[#aaa] dark:hover:bg-white/[0.12]"
 			onClick={handleCopyNote}
 		>
-			<Copy size={20} className="p-0.5 text-white hover:transform hover:animate-pulse" />
+			<Copy size={13} className="text-current" />
+			Copiar
 		</button>
 	)
 }

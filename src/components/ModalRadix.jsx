@@ -7,7 +7,7 @@ const ModalRadix = ({ children, trigger, title, description, isOpen, onOpenChang
 			<Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
 			<Dialog.Portal>
 				<Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
-				<Dialog.Content className="fixed top-1/2 left-1/2 z-50 w-11/12 max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg bg-slate-50 p-4 text-center text-black shadow-lg md:w-6/12 dark:bg-[#2c2c2c]">
+				<Dialog.Content className="fixed top-1/2 left-1/2 z-50 w-11/12 max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white p-5 text-left text-black shadow-2xl shadow-black/20 md:w-6/12 dark:bg-[#242424] dark:shadow-black/60">
 					<Dialog.DialogTitle className="hidden">{title}</Dialog.DialogTitle>
 					<Dialog.DialogDescription className="hidden">{description}</Dialog.DialogDescription>
 					{children}
