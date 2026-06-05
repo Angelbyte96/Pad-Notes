@@ -109,13 +109,13 @@ const NoteArticle = ({
 								{searchTerm && (
 									<div className="flex justify-end gap-2 md:gap-4">
 										<button
-											className="cursor-pointer rounded-lg border border-gray-300 bg-transparent px-2 py-1 transition-all duration-200 hover:border-gray-400 dark:border-gray-600 dark:hover:border-gray-500"
+											className="flex cursor-pointer items-center rounded-lg border border-[#e8e8e8] bg-white px-2 py-1.5 transition-all duration-200 hover:border-amber-200/60 hover:bg-amber-50 dark:border-white/[0.07] dark:bg-[#262626] dark:hover:border-amber-500/20 dark:hover:bg-[#2d2d2d]"
 											aria-label="Limpiar búsqueda"
 											onClick={() => setSearchTerm('')}
 										>
-											<Eraser className="w-6 text-black dark:text-white" />
+											<Eraser size={16} className="text-[#555] dark:text-[#aaa]" />
 										</button>
-										<div className="flex gap-2 self-end rounded-lg bg-[#e5e7eb] px-4 py-2 text-black md:text-lg dark:bg-[#2c2c2c] dark:text-white">
+										<div className="inline-flex items-center gap-1.5 rounded-lg border border-[#e8e8e8] bg-white px-3 py-1.5 text-xs font-medium text-[#666] dark:border-white/[0.07] dark:bg-[#262626] dark:text-[#999]">
 											<span>
 												{filteredNotes.length}
 												{filteredNotes.length === 1 ? ' nota encontrada' : ' notas encontradas'}

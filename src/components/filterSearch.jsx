@@ -22,13 +22,17 @@ const FilterSearch = ({ searchText, setSearchText }) => {
 	}
 
 	return (
-		<article
-			className={`flex w-full items-center justify-start overflow-hidden py-1 transition-all duration-300 ease-in-out`}
-		>
+		<article className="flex w-full items-center justify-start py-1">
+			<button
+				onClick={handleClick}
+				className={`flex shrink-0 items-center overflow-hidden rounded-lg border border-[#e8e8e8] bg-white py-1.5 hover:border-amber-200/60 hover:bg-amber-50 dark:border-white/[0.07] dark:bg-[#262626] dark:hover:border-amber-500/20 dark:hover:bg-[#2d2d2d] ${barIsVisible ? 'pointer-events-none w-0 border-transparent px-0 opacity-0' : 'cursor-pointer w-auto px-2 opacity-100'} transition-all duration-300 ease-in-out`}
+			>
+				<Search size={16} className="text-[#555] dark:text-[#aaa]" />
+			</button>
 			<input
 				ref={inputRef}
 				type="text"
-				className={`rounded-md bg-white py-1 pl-1 ${barIsVisible ? 'w-full opacity-100' : 'w-0 opacity-0'} transition-all duration-300 ease-in-out`}
+				className={`rounded-lg border border-[#e5e7eb] bg-white py-1.5 text-sm text-black outline-none placeholder:text-[#aaa] focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 dark:border-white/[0.1] dark:bg-[#1e1e1e] dark:text-white dark:placeholder-[#555] ${barIsVisible ? 'w-full px-3 opacity-100' : 'w-0 px-0 opacity-0'} transition-all duration-300 ease-in-out`}
 				placeholder="Nota a buscar"
 				disabled={!barIsVisible}
 				onKeyDown={handleKeyDown}
@@ -36,12 +40,6 @@ const FilterSearch = ({ searchText, setSearchText }) => {
 				onChange={(e) => setSearchText(e.target.value)}
 				value={searchText}
 			/>
-			<button
-				onClick={handleClick}
-				className={`rounded-md bg-cyan-600 px-1 py-0.5 text-black dark:text-white ${barIsVisible ? 'pointer-events-none absolute opacity-0' : 'cursor-pointer opacity-100'} transition-all duration-300 ease-in-out`}
-			>
-				<Search className='text-white'/>
-			</button>
 		</article>
 	)
 }

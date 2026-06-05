@@ -57,29 +57,27 @@ const SendNotes = ({ onNoteAdded }) => {
 				isOpen={isOpen}
 				onOpenChange={setIsOpen}
 				trigger={
-					<button className="flex cursor-pointer items-center gap-2 self-end rounded-md bg-green-700 px-2 py-1 text-sm font-semibold text-white hover:bg-green-800 md:text-base">
+					<button className="flex cursor-pointer items-center gap-1.5 self-end rounded-lg border border-green-200 bg-green-50 px-3 py-1.5 text-xs font-semibold text-green-700 transition-all duration-200 hover:bg-green-100 dark:border-green-500/20 dark:bg-green-500/[0.12] dark:text-green-400 dark:hover:bg-green-500/20">
 						Nueva nota{' '}
-						<span>
-							<StickyNote width={18} height={18} />
-						</span>
+						<StickyNote width={14} height={14} />
 					</button>
 				}
 			>
 				<section id="sendNotes" className="flex w-full flex-col items-center gap-4">
-					<h3 className="text-xl text-black md:text-2xl dark:text-white">Ingresa alguna nota</h3>
+					<h3 className="self-start text-sm font-bold tracking-widest text-black uppercase dark:text-white">Nueva nota</h3>
 					<form className="flex w-full flex-col justify-center gap-2" onSubmit={handleSubmit}>
 						<input
 							type="text"
-							className="w-full rounded-md bg-white p-1 text-black md:w-full"
+							className="w-full rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 text-sm text-black outline-none transition-all placeholder:text-[#aaa] focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 dark:border-white/[0.1] dark:bg-[#1e1e1e] dark:text-white dark:placeholder-[#555]"
 							id="title"
 							name="title"
 							value={noteTitle}
 							onChange={(e) => setNoteTitle(e.target.value)}
-							placeholder="Titulo"
+							placeholder="Título"
 						/>
 						<textarea
 							type="text"
-							className="field-sizing-content w-full rounded-md bg-white p-1 break-words whitespace-normal text-black md:w-full"
+							className="field-sizing-content w-full break-words whitespace-normal rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 text-sm text-black outline-none transition-all placeholder:text-[#aaa] focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 dark:border-white/[0.1] dark:bg-[#1e1e1e] dark:text-white dark:placeholder-[#555]"
 							id="note"
 							name="note"
 							value={note}
@@ -87,7 +85,7 @@ const SendNotes = ({ onNoteAdded }) => {
 							placeholder="Escribe tu nota aquí"
 						/>
 						<button
-							className="cursor-pointer rounded-md bg-cyan-700 p-1 font-semibold text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+							className="flex cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-green-200 bg-green-50 px-3 py-1.5 text-xs font-semibold text-green-700 transition-all duration-200 hover:bg-green-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-green-500/20 dark:bg-green-500/[0.12] dark:text-green-400 dark:hover:bg-green-500/20"
 							disabled={isUnchanged}
 							aria-label="Guardar"
 						>
