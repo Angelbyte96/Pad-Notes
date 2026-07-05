@@ -5,7 +5,7 @@ import { toast } from '@pheralb/toast'
 import { useCallback, useEffect, useState } from 'react'
 import { NoteArticle } from './NoteArticle'
 
-const ListNotes = ({ userName }) => {
+const ListNotes = () => {
 	const { refreshNotes, handleNoteAdded } = useChangeNotes()
 	const [notes, setNotes] = useState([])
 	const [noteTitle, setNoteTitle] = useState('')
@@ -67,13 +67,12 @@ const ListNotes = ({ userName }) => {
 			handleCancelEdit={handleCancelEdit}
 			editingNoteId={editingNoteId}
 			setEditingNoteId={setEditingNoteId}
-		noteMessage={noteMessage}
-		setNoteMessage={setNoteMessage}
-		setNoteTitle={setNoteTitle}
-		onNoteAdded={handleNoteAdded}
-	/>
+			noteMessage={noteMessage}
+			setNoteMessage={setNoteMessage}
+			setNoteTitle={setNoteTitle}
+			onNoteAdded={handleNoteAdded}
+		/>
 	)
 }
 
 export { ListNotes }
-

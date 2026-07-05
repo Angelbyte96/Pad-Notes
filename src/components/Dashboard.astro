@@ -8,23 +8,8 @@ const { isAuthenticated } = Astro.locals.auth()
 if (!isAuthenticated) {
 	return Astro.redirect('/')
 }
-
-// Obtener el usuario actual
-const user = await Astro.locals.currentUser()
-
-// Obtener el nombre del usuario
-const userName =
-	user?.firstName || user?.username || user?.emailAddresses[0]?.emailAddress || 'Usuario'
 ---
 
-<section class="flex min-h-dvh w-full flex-col items-center gap-4 overflow-y-auto pb-20">
-	<h2 class="text-xl text-black md:text-3xl dark:text-white">
-		Bienvenido a tu inicio{' '}
-		<span class="font-semibold text-accent-600 uppercase dark:text-accent-400">
-			{userName}
-		</span>
-	</h2>
-
-	{/* Sección para ingresar notas */}
-	<ListNotes client:load userName={userName}/>
+<section class='flex min-h-dvh w-full flex-col items-center gap-4 overflow-y-auto pb-20'>
+	<ListNotes client:load />
 </section>
