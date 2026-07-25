@@ -1,13 +1,5 @@
 ---
 import { ListNotes } from './ListNotes'
-
-// Obtener info de autenticación en el servidor
-const { isAuthenticated } = Astro.locals.auth()
-
-// Redirigir si no está autenticado
-if (!isAuthenticated) {
-	return Astro.redirect('/')
-}
 ---
 
 <section class='flex min-h-dvh w-full flex-col items-center gap-4 overflow-y-auto pb-20'>

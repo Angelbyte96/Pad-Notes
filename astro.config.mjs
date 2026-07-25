@@ -8,6 +8,7 @@ import { defineConfig } from 'astro/config'
 export default defineConfig({
 	output: 'server',
 	adapter: vercel(),
+	compressHTML: true,
 	vite: {
 		ssr: {
 			// Forzamos que "tslib" se incluya en el bundle para SSR
