@@ -142,7 +142,7 @@ const NoteArticle = ({
 															<div className="group hover:border-accent-200/60 dark:hover:border-accent-500/20 relative flex h-full w-full cursor-pointer flex-col justify-between gap-3 overflow-hidden rounded-xl border border-[#e8e8e8] bg-white/50 px-5 py-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/70 hover:shadow-lg dark:border-white/[0.07] dark:bg-white/[0.05] dark:hover:bg-white/[0.08] dark:hover:shadow-black/50">
 																<div className="from-accent-400 to-accent-600 absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-gradient-to-r transition-transform duration-500 group-hover:scale-x-100" />
 																<div className="mt-1 flex flex-col gap-1.5">
-																	<h2 className="self-start text-sm font-bold tracking-widest text-black uppercase dark:text-white">
+																	<h2 className="w-full self-start text-sm font-bold tracking-widest break-words text-black uppercase dark:text-white">
 																		{highLightMatch(note.title, searchTerm)}
 																	</h2>
 																	<p className="w-full overflow-hidden text-[13px] leading-relaxed text-ellipsis whitespace-nowrap text-[#777] dark:text-[#999]">
@@ -219,10 +219,10 @@ const NoteArticle = ({
 																		<CalendarDays size={11} />
 																		{dateCreated}
 																	</span>
-																	<h2 className="self-start text-xl font-bold tracking-wider text-black uppercase dark:text-white">
+																	<h2 className="w-full self-start text-xl font-bold tracking-wider break-words text-black uppercase dark:text-white">
 																		{highLightMatch(note.title, searchTerm)}
 																	</h2>
-																	<p className="my-2 self-start text-start text-[13px] leading-loose break-words whitespace-pre-line text-[#555] dark:text-[#c0c0c0]">
+																	<p className="my-2 w-full self-start text-start text-[13px] leading-loose break-words whitespace-pre-line text-[#555] dark:text-[#c0c0c0]">
 																		{highLightMatch(note.textNote, searchTerm)}
 																	</p>
 																	<div className="flex w-full items-center justify-between gap-2 border-t border-[#f0f0f0] pt-3 dark:border-white/[0.07]">
