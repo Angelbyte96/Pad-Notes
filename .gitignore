@@ -32,3 +32,6 @@ pnpm-debug.log*
 # clerk configuration (can include secrets)
 /.clerk/
 .vercel
+# Local Pi runtime state
+.atl/
+.pi/
