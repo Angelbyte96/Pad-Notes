@@ -39,7 +39,8 @@ Out of scope: non-security majors (eslint 10, lucide 1.x, @formkit/tempo 1.x, @n
   - Rationale: stayed on astro 7.3.3; 7.3.4 violates the repo `minimumReleaseAge` policy (pnpm auto-added exclusions, reverted).
   - Changelog 7.1.3→7.3.3 reviewed: no breaking changes affecting this project (no `base`, no adapter internals).
   - RDD: assessed `high` (high_risk) → consent granted → 4-lens review approved and acknowledged (lineage `review-827840413bd17ec6`). 7 non-blocking advisory findings, all about this document being stale at commit time; resolved by this update.
-- T2: overrides `brace-expansion@1.1.16 → ^1.1.18`, `postcss@<8.5.23 → ^8.5.23` (range selector; exact `@8.5.22` selector did not match; replaces the two redundant exact postcss entries). Resolved brace-expansion@1.1.21 / postcss@8.5.28, both older than the release-age policy window, no exclusions added. build exit 0 · lint exit 0 · audit: **0 vulnerabilities**.
+- T2: overrides `brace-expansion@1.1.16 → ^1.1.18`, `postcss@<8.5.23 → ^8.5.23` (range selector; exact `@8.5.22` selector did not match; replaces the two redundant exact postcss entries). Resolved brace-expansion@1.1.21 / postcss@8.5.28, both older than the release-age policy window, no exclusions added. build exit 0 · lint exit 0 · audit: **0 vulnerabilities**. Commit `50dafb7`.
+  - RDD: assessed `high` → consent granted → 4-lens review approved and acknowledged (lineage `review-cba9ec77bcff9783`). Advisory follow-up: narrow `postcss@<8.5.23` to `postcss@>=8.0.0 <8.5.23` to avoid cross-major forcing (no postcss 7.x in tree today).
 
 ## Next step
 Push `chore/security-deps` and open a PR to `main` (user decision). Pending follow-ups (out of scope): `dev` diverged from `main` and still pins Astro 6; `@clerk/clerk-react` deprecated; non-security majors.
